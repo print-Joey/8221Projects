@@ -256,13 +256,13 @@ public class GameController extends JFrame{
 
         //button
         resetButton.            addActionListener(innerClassControllerObj);
-        //resetPanel.             add(resetButton);
+        resetPanel.             add(resetButton);
 
 //layouts
         northPanel.add(logoPanel,BorderLayout.NORTH);
         northPanel.add(pointsDisplayPanel,BorderLayout.CENTER);
         southPanel.add(timePanel,BorderLayout.NORTH);
-        southPanel.add(resetButton,BorderLayout.CENTER);
+        southPanel.add(resetPanel,BorderLayout.CENTER);
 
         controlMainPanel.       add(northPanel,BorderLayout.NORTH);
         controlMainPanel.       add(msgDisplayScrollPane);
