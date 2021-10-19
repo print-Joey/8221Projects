@@ -1,6 +1,5 @@
 package Piccross;
 
-import javax.print.DocFlavor;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -9,8 +8,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.SOUTH;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
-//Cstor      Constructor flag Using CTRL + f to locate it
+//Con      Constructor flag Using CTRL + f to locate it
 
 
 
@@ -18,7 +19,7 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 
 
 
-public class GameController extends JFrame{
+public class GameView extends JFrame{
     private final String LOGO_PATH          =       "piccrossNameMin.jpg";
     private final String POINTS             =       "Points:  ";
     private final String TIME               =       "Time:  ";
@@ -35,7 +36,7 @@ public class GameController extends JFrame{
 
     //================================================================
 
-    GameController.Controller innerClassControllerObj = new Controller();
+    GameView.Controller innerClassControllerObj = new Controller();
     //================================================================
     /* members of initMarkPanel()*/
     JPanel              markPanel;
@@ -211,7 +212,7 @@ public class GameController extends JFrame{
         timePanel               =       new JPanel();
         timeLabel               =       new JLabel(TIME);
         resetButton             =       new JButton(RESET);
-       // resetPanel              =       new JPanel();
+        resetPanel              =       new JPanel();
 
 
 
@@ -305,7 +306,61 @@ public class GameController extends JFrame{
         combinedTopBoardPanel.      add(initBoardPanel(),BorderLayout.CENTER);
         return combinedTopBoardPanel;
     }
-    //Cstor      Constructor flag Using CTRL + f to locate it
+
+    //final String RESOURCE_PATH                                  = "A11\\";
+    final String SPLASH_IMAGE_PATH                              = "piccrossLogo.jpg";
+    //final String FILE_NOT_FOUND                                 = "File not found!!";
+    final String AUTHOR_SIGNATURE                               = "Lin,Jiayu/Luo,Chang's Piccross Game Staring....";
+    final String INTERRUPTED_EXCEPTION                          = "InterruptedException!!";
+    JWindow splashScreenWindow = new JWindow();
+
+    JPanel windowPanel = new JPanel(new BorderLayout());
+    ImageIcon windowImage = new ImageIcon(RESOURCE_PATH + SPLASH_IMAGE_PATH);
+    JLabel authorSignatureLabel = new JLabel(AUTHOR_SIGNATURE, JLabel.CENTER);
+    public void displaySplashScreen(int time) {
+
+
+        try {
+            JLabel windowImageLabel = new JLabel(windowImage);
+            //add image to windowPanel
+            windowPanel.add(windowImageLabel, CENTER);
+        } catch (Exception e) {
+            System.err.println(FILE_NOT_FOUND);
+        }
+
+
+
+        //Customize signature
+        authorSignatureLabel.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
+        authorSignatureLabel.setForeground(Color.ORANGE);
+        authorSignatureLabel.setBackground(new Color(18,84,8));
+        authorSignatureLabel.setOpaque(true);
+
+
+        //set Attributes width/height for Splash
+        int width = windowImage.getIconWidth() ;
+        int height = windowImage.getIconHeight();
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screen.width - width) / 2;
+        int y = (screen.height - height) / 2;
+
+
+        //set the location and the size of the window
+        splashScreenWindow.pack();
+        splashScreenWindow.setBounds(x, y, width, height);
+        windowPanel.add(authorSignatureLabel, SOUTH);
+        splashScreenWindow.setContentPane(windowPanel);
+        splashScreenWindow.setVisible(true);
+        try {
+            Thread.sleep(time);
+            dispose();
+        }catch (InterruptedException e) {
+            System.err.print(INTERRUPTED_EXCEPTION);
+
+        }
+
+    }
+    //Con      Constructor flag Using CTRL + f to locate it
     /**
     * Initiate the game GUI
     *
@@ -313,37 +368,48 @@ public class GameController extends JFrame{
     * @version 1.0
     * @since   2021-09-24
     */
-    public GameController() {
+    public GameView() {
 
-        JFrame mainFrame = new JFrame();
-        JPanel gamePanel = new JPanel(new BorderLayout());
+        displaySplashScreen(1000);
 
-        //combine all the panels together
-        gamePanel.add(addTopAndBoardPanel(),BorderLayout.CENTER);
-        gamePanel.add(initControlPanel(),BorderLayout.EAST);
-        gamePanel.add(addLeftAndMarkPanel(),BorderLayout.WEST);
-        //gamePanel.add(initTopPanel(),BorderLayout.NORTH);
-        gamePanel.setVisible(true);
 
-        //add all the panels to the main frame
-        mainFrame.add(gamePanel);
-        mainFrame.pack();
-        
-        mainFrame.setVisible(true);
-        mainFrame.setResizable(false);
-        mainFrame.setTitle(TITLE);
-        mainFrame.setBackground(Color.BLACK);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Making the Game window centralized
-        int width = mainFrame.getWidth() ;
-        int height = mainFrame.getHeight();
-        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (screen.width - width) / 2;
-        int y = (screen.height - height) / 2;
-        mainFrame.setBounds(x,y,width,height);
 
+
+        EventQueue.invokeLater(new Runnable(){
+            @Override
+            public void run() {
+                JFrame mainFrame = new JFrame();
+                JPanel gamePanel = new JPanel(new BorderLayout());
+
+                //combine all the panels together
+                gamePanel.add(addTopAndBoardPanel(), BorderLayout.CENTER);
+                gamePanel.add(initControlPanel(), BorderLayout.EAST);
+                gamePanel.add(addLeftAndMarkPanel(), BorderLayout.WEST);
+
+                gamePanel.setVisible(true);
+
+                //add all the panels to the main frame
+                mainFrame.add(gamePanel);
+                mainFrame.pack();
+
+                mainFrame.setVisible(true);
+                mainFrame.setResizable(false);
+                mainFrame.setTitle(TITLE);
+                mainFrame.setBackground(Color.BLACK);
+                mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                //Making the Game window centralized
+                int width = mainFrame.getWidth();
+                int height = mainFrame.getHeight();
+                Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+                int x = (screen.width - width) / 2;
+                int y = (screen.height - height) / 2;
+                mainFrame.setBounds(x, y, width, height);
+           }
+        });
     }
+
 
 
     protected class Controller implements ActionListener {
@@ -354,10 +420,10 @@ public class GameController extends JFrame{
         final String BLANK_SPACE = "           ";
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == GameController.this.resetButton) {
+            if (e.getSource() == GameView.this.resetButton) {
                 messageDisplayTextArea.append(BLANK_SPACE+RESET_BUTTON_REACTION);
 
-            } else if (e.getSource() == GameController.this.markCheckbox) {
+            } else if (e.getSource() == GameView.this.markCheckbox) {
                 if(markCheckBoxCount % 2 !=0){
 
                     messageDisplayTextArea.append(BLANK_SPACE+UNCHECK_MARK_CHECKBOX_REACTION);
@@ -373,7 +439,12 @@ public class GameController extends JFrame{
                 for (int j = 0; j < UnitOfBoardButton[i].length; j++) {
 
                     if(UnitOfBoardButton[i][j].getModel().isArmed()){
-                        messageDisplayTextArea.append("button"+i+j+"is Pressed\n");
+                         int row    = i;
+                         int column = j;
+                         row ++;
+                         column++;
+                        messageDisplayTextArea.append((BLANK_SPACE+"Button"+"["+(row)+","+(column)+"]"+" is Pressed\n"));
+
                     }
                 }
 
