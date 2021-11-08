@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="Piccross">
-    <output-path>$PROJECT_DIR$/out/artifacts/Piccross</output-path>
-    <root id="archive" name="Piccross.jar">
-      <element id="module-output" name="A11" />
-    </root>
-  </artifact>
-</component>
