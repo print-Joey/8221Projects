@@ -406,6 +406,34 @@ public class GameView extends JFrame{
                 int x = (screen.width - width) / 2;
                 int y = (screen.height - height) / 2;
                 mainFrame.setBounds(x, y, width, height);
+
+                JMenuBar menu = new JMenuBar();
+                JMenu Game = new JMenu("Game");
+                ImageIcon newIcon = new ImageIcon("piciconnew.gif");
+                JMenuItem newGame = new JMenuItem("New",newIcon);
+                ImageIcon solutionIcon = new ImageIcon("piciconsol.gif");
+                JMenuItem solution = new JMenuItem("Solution",solutionIcon);
+                ImageIcon exitIcon = new ImageIcon("piciconext.gif");
+                JMenuItem exit = new JMenuItem("Exit",exitIcon);
+                exit.addActionListener(new GameController.ExitListener());
+                Game.add(newGame);
+                Game.add(solution);
+                Game.add(exit);
+
+                JMenu Help = new JMenu("Help");
+                ImageIcon colorsIcon = new ImageIcon("piciconcol.gif");
+                JMenuItem colors = new JMenuItem("Colors",colorsIcon);
+                colors.addActionListener(new GameController.ColorListener());
+                ImageIcon aboutIcon = new ImageIcon("piciconabt.gif");
+                JMenuItem about = new JMenuItem("About",aboutIcon);
+                about.addActionListener(new GameController.AboutListener());
+                Help.add(colors);
+                Help.add(about);
+
+                menu.add(Game);
+                menu.add(Help);
+
+                mainFrame.setJMenuBar(menu);
            }
         });
     }
