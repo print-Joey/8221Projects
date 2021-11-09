@@ -30,7 +30,28 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="81bed32f-1550-4bb9-b2d6-bfe5bae88e73" name="Default Changelist" comment="" />
+    <list default="true" id="81bed32f-1550-4bb9-b2d6-bfe5bae88e73" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/production/A11/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/Game.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/GameController$AboutListener.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/GameController$ColorListener$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/GameController$ColorListener$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/GameController$ColorListener$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/GameController$ColorListener.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/GameController$ExitListener.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/GameController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/GameView$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/GameView$Controller.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/GameView.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/Resource/piccrossLogo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/Resource/piccrossNameMin.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/Resource/piciconabt.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/Resource/piciconcol.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/Resource/piciconext.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/Resource/piciconnew.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/production/A11/Piccross/Resource/piciconsol.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,17 +80,20 @@
     </option>
   </component>
   <component name="ProjectId" id="1xv0Qk682xbxY3DuNs35eM6gH5X" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/A11/src/Piccross" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/A11" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -82,6 +106,7 @@
   </component>
   <component name="RunManager" selected="Application.Game">
     <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
       <option name="MAIN_CLASS_NAME" value="Piccross.Game" />
       <module name="A11" />
       <extension name="coverage">
@@ -95,7 +120,7 @@
       </method>
     </configuration>
     <configuration name="GameController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GameController" />
+      <option name="MAIN_CLASS_NAME" value="Piccross.GameController" />
       <module name="A11" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -104,19 +129,6 @@
     <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Game" />
       <module name="A11" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SplashScreen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Piccross.SplashScreen" />
-      <module name="A11" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Piccross.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -132,10 +144,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Game" />
+      <item itemvalue="Application.GameController" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Game" />
-        <item itemvalue="Application.SplashScreen" />
         <item itemvalue="Application.GameController" />
       </list>
     </recent_temporary>
@@ -185,6 +200,9 @@
       <workItem from="1636387142659" duration="1268000" />
       <workItem from="1636420091541" duration="92000" />
       <workItem from="1636420199241" duration="40000" />
+      <workItem from="1636420403964" duration="109000" />
+      <workItem from="1636420530173" duration="35000" />
+      <workItem from="1636420572242" duration="1060000" />
     </task>
     <servers />
   </component>
@@ -215,17 +233,21 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="163" y="116" key="#Project_Structure" timestamp="1636388183482">
+    <state x="163" y="116" key="#Project_Structure" timestamp="1636421048261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="163" y="116" key="#Project_Structure/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1633728983349" />
     <state x="1529" y="116" key="#Project_Structure/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631220335627" />
-    <state x="163" y="116" key="#Project_Structure/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636388183482" />
-    <state x="414" y="175" width="1092" height="762" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1634254239992">
+    <state x="163" y="116" key="#Project_Structure/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636421048261" />
+    <state x="59" y="56" width="1092" height="728" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1636421515646">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" width="1092" height="762" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634254239992" />
+    <state x="59" y="56" width="1092" height="728" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636421515646" />
     <state x="765" y="223" key="#com.intellij.ide.util.MemberChooser" timestamp="1633835316732">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -251,42 +273,52 @@
     </state>
     <state x="1458" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631340532426" />
     <state x="222" y="93" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636388194574" />
-    <state x="740" y="242" key="FileChooserDialogImpl" timestamp="1634997394729">
+    <state x="740" y="242" key="FileChooserDialogImpl" timestamp="1636421638558">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="242" key="FileChooserDialogImpl/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634997394729" />
-    <state width="1877" height="2" key="GridCell.Tab.0.bottom" timestamp="1634693406762">
+    <state x="740" y="242" key="FileChooserDialogImpl/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636421638558" />
+    <state width="916" height="151" key="GridCell.Tab.0.bottom" timestamp="1636421527057">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="13" key="GridCell.Tab.0.bottom/-1366.0.1366.728/0.0.1920.1040@-1366.0.1366.728" timestamp="1633838589841" />
     <state width="1877" height="2" key="GridCell.Tab.0.bottom/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634693406762" />
     <state width="1877" height="184" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631901834388" />
-    <state width="1877" height="2" key="GridCell.Tab.0.center" timestamp="1634693406762">
+    <state width="916" height="151" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636421527057" />
+    <state width="916" height="151" key="GridCell.Tab.0.center" timestamp="1636421527057">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="13" key="GridCell.Tab.0.center/-1366.0.1366.728/0.0.1920.1040@-1366.0.1366.728" timestamp="1633838589841" />
     <state width="1877" height="2" key="GridCell.Tab.0.center/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634693406762" />
     <state width="1877" height="184" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631901834388" />
-    <state width="1877" height="2" key="GridCell.Tab.0.left" timestamp="1634693406761">
+    <state width="916" height="151" key="GridCell.Tab.0.center/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636421527057" />
+    <state width="916" height="151" key="GridCell.Tab.0.left" timestamp="1636421527057">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="13" key="GridCell.Tab.0.left/-1366.0.1366.728/0.0.1920.1040@-1366.0.1366.728" timestamp="1633838589841" />
     <state width="1877" height="2" key="GridCell.Tab.0.left/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634693406761" />
     <state width="1877" height="184" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631901834388" />
-    <state width="1877" height="2" key="GridCell.Tab.0.right" timestamp="1634693406762">
+    <state width="916" height="151" key="GridCell.Tab.0.left/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636421527057" />
+    <state width="916" height="151" key="GridCell.Tab.0.right" timestamp="1636421527057">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="13" key="GridCell.Tab.0.right/-1366.0.1366.728/0.0.1920.1040@-1366.0.1366.728" timestamp="1633838589841" />
     <state width="1877" height="2" key="GridCell.Tab.0.right/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634693406762" />
     <state width="1877" height="184" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631901834388" />
+    <state width="916" height="151" key="GridCell.Tab.0.right/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636421527057" />
+    <state x="343" y="160" key="NewModule_or_Project.wizard" timestamp="1636420795463">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="343" y="160" key="NewModule_or_Project.wizard/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636420795463" />
     <state x="732" y="139" key="RollbackChangesDialog" timestamp="1634685533703">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="732" y="139" key="RollbackChangesDialog/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634685533703" />
-    <state x="786" y="160" key="SettingsEditor" timestamp="1633729096944">
+    <state x="324" y="171" key="SettingsEditor" timestamp="1636421639265">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="786" y="160" key="SettingsEditor/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1633729096944" />
+    <state x="324" y="171" key="SettingsEditor/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636421639265" />
     <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1636387712811">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -307,11 +339,12 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="760" y="416" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636387417026" />
-    <state x="320" y="117" key="new project wizard" timestamp="1634997431067">
+    <state x="608" y="187" key="new project wizard" timestamp="1636420694820">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="320" y="117" key="new project wizard/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634997431067" />
     <state x="1686" y="117" key="new project wizard/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631220330524" />
+    <state x="608" y="187" key="new project wizard/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636420694820" />
     <state x="346" y="334" width="672" height="678" key="search.everywhere.popup" timestamp="1633836140025">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -321,14 +354,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/A11/src/Piccross/GameView.java</url>
-          <line>319</line>
-          <properties class="Piccross.GameView" method="displaySplashScreen">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/A11/src/Piccross/GameView.java</url>
           <line>361</line>
