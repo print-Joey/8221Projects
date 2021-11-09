@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="A11:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="81bed32f-1550-4bb9-b2d6-bfe5bae88e73" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/Jo0918/8221Projects" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1xv0Qk682xbxY3DuNs35eM6gH5X" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/A11/src/Piccross" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\21F_JAP_IDE_Path\A11\src\Piccross" />
+      <recent name="C:\21F_JAP_IDE_Path\A11\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Game">
+    <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Piccross.Game" />
+      <module name="A11" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Piccross.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GameController" />
+      <module name="A11" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Game" />
+      <module name="A11" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SplashScreen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Piccross.SplashScreen" />
+      <module name="A11" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Piccross.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Game" />
+        <item itemvalue="Application.SplashScreen" />
+        <item itemvalue="Application.GameController" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="81bed32f-1550-4bb9-b2d6-bfe5bae88e73" name="Default Changelist" comment="" />
+      <created>1631220243392</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1631220243392</updated>
+      <workItem from="1631220244838" duration="9346000" />
+      <workItem from="1631230769739" duration="5527000" />
+      <workItem from="1631236375139" duration="1533000" />
+      <workItem from="1631294715236" duration="2416000" />
+      <workItem from="1631339251267" duration="11640000" />
+      <workItem from="1631661471385" duration="2228000" />
+      <workItem from="1631817693663" duration="735000" />
+      <workItem from="1631896542651" duration="3904000" />
+      <workItem from="1632446772654" duration="603000" />
+      <workItem from="1632503958961" duration="784000" />
+      <workItem from="1632751929782" duration="643000" />
+      <workItem from="1633726610899" duration="1259000" />
+      <workItem from="1633728876555" duration="594000" />
+      <workItem from="1633729502450" duration="616000" />
+      <workItem from="1633834824554" duration="2809000" />
+      <workItem from="1633837685702" duration="898000" />
+      <workItem from="1633838975649" duration="17000" />
+      <workItem from="1634007443387" duration="42000" />
+      <workItem from="1634239721606" duration="8845000" />
+      <workItem from="1634249620970" duration="622000" />
+      <workItem from="1634251547535" duration="3634000" />
+      <workItem from="1634270159378" duration="1031000" />
+      <workItem from="1634330829422" duration="3008000" />
+      <workItem from="1634473736940" duration="4617000" />
+      <workItem from="1634480501828" duration="2573000" />
+      <workItem from="1634511354419" duration="2617000" />
+      <workItem from="1634672284384" duration="1901000" />
+      <workItem from="1634683325817" duration="126000" />
+      <workItem from="1634684137585" duration="3709000" />
+      <workItem from="1634847355555" duration="19000" />
+      <workItem from="1634924684846" duration="595000" />
+      <workItem from="1634954011348" duration="634000" />
+      <workItem from="1634997166484" duration="267000" />
+      <workItem from="1636316419667" duration="1833000" />
+      <workItem from="1636387142659" duration="1268000" />
+      <workItem from="1636420091541" duration="92000" />
+      <workItem from="1636420199241" duration="40000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="163" y="116" key="#Project_Structure" timestamp="1636388183482">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="163" y="116" key="#Project_Structure/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1633728983349" />
+    <state x="1529" y="116" key="#Project_Structure/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631220335627" />
+    <state x="163" y="116" key="#Project_Structure/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636388183482" />
+    <state x="414" y="175" width="1092" height="762" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1634254239992">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" width="1092" height="762" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634254239992" />
+    <state x="765" y="223" key="#com.intellij.ide.util.MemberChooser" timestamp="1633835316732">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="223" key="#com.intellij.ide.util.MemberChooser/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1633835316732" />
+    <state x="771" y="347" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1633729021688">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="771" y="347" key="#com.intellij.ide.util.TreeClassChooserDialog/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1633729021688" />
+    <state x="1146" y="278" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1634684290652">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1146" y="278" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634684290652" />
+    <state x="640" y="161" key="#com.intellij.unscramble.UnscrambleDialog" timestamp="1634253781059">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="640" y="161" key="#com.intellij.unscramble.UnscrambleDialog/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634253781059" />
+    <state width="292" height="606" key="Diff.GoToChangePopup" timestamp="1636388145544">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="292" height="606" key="Diff.GoToChangePopup/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636388145544" />
+    <state x="222" y="93" width="1736" height="856" key="DiffContextDialog" timestamp="1636388194574">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1458" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631340532426" />
+    <state x="222" y="93" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636388194574" />
+    <state x="740" y="242" key="FileChooserDialogImpl" timestamp="1634997394729">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="242" key="FileChooserDialogImpl/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634997394729" />
+    <state width="1877" height="2" key="GridCell.Tab.0.bottom" timestamp="1634693406762">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1323" height="13" key="GridCell.Tab.0.bottom/-1366.0.1366.728/0.0.1920.1040@-1366.0.1366.728" timestamp="1633838589841" />
+    <state width="1877" height="2" key="GridCell.Tab.0.bottom/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634693406762" />
+    <state width="1877" height="184" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631901834388" />
+    <state width="1877" height="2" key="GridCell.Tab.0.center" timestamp="1634693406762">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1323" height="13" key="GridCell.Tab.0.center/-1366.0.1366.728/0.0.1920.1040@-1366.0.1366.728" timestamp="1633838589841" />
+    <state width="1877" height="2" key="GridCell.Tab.0.center/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634693406762" />
+    <state width="1877" height="184" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631901834388" />
+    <state width="1877" height="2" key="GridCell.Tab.0.left" timestamp="1634693406761">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1323" height="13" key="GridCell.Tab.0.left/-1366.0.1366.728/0.0.1920.1040@-1366.0.1366.728" timestamp="1633838589841" />
+    <state width="1877" height="2" key="GridCell.Tab.0.left/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634693406761" />
+    <state width="1877" height="184" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631901834388" />
+    <state width="1877" height="2" key="GridCell.Tab.0.right" timestamp="1634693406762">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1323" height="13" key="GridCell.Tab.0.right/-1366.0.1366.728/0.0.1920.1040@-1366.0.1366.728" timestamp="1633838589841" />
+    <state width="1877" height="2" key="GridCell.Tab.0.right/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634693406762" />
+    <state width="1877" height="184" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631901834388" />
+    <state x="732" y="139" key="RollbackChangesDialog" timestamp="1634685533703">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="732" y="139" key="RollbackChangesDialog/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634685533703" />
+    <state x="786" y="160" key="SettingsEditor" timestamp="1633729096944">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="786" y="160" key="SettingsEditor/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1633729096944" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1636387712811">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636387712811" />
+    <state x="734" y="172" key="VcsDiffUtil.ChangesDialog" timestamp="1636388151810">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="734" y="172" key="VcsDiffUtil.ChangesDialog/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636388151810" />
+    <state x="777" y="430" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1636387408784">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="777" y="430" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636387408784" />
+    <state x="668" y="95" width="583" height="849" key="find.popup" timestamp="1632503971880">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="668" y="95" width="583" height="849" key="find.popup/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1632503971880" />
+    <state x="760" y="416" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1636387417026">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="760" y="416" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636387417026" />
+    <state x="320" y="117" key="new project wizard" timestamp="1634997431067">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="320" y="117" key="new project wizard/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1634997431067" />
+    <state x="1686" y="117" key="new project wizard/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631220330524" />
+    <state x="346" y="334" width="672" height="678" key="search.everywhere.popup" timestamp="1633836140025">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="346" y="334" width="672" height="678" key="search.everywhere.popup/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1633836140025" />
+    <state x="1712" y="334" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1631220729426" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/A11/src/Piccross/GameView.java</url>
+          <line>319</line>
+          <properties class="Piccross.GameView" method="displaySplashScreen">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/A11/src/Piccross/GameView.java</url>
+          <line>361</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="javax.swing.JWindow" memberName="rootPane" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>
