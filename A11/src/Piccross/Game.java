@@ -7,8 +7,9 @@ public class Game {
        // SplashScreen splashScreenObj = new SplashScreen(1000);
 
 
-
-GameView gameViewObj = new GameView();
+        GameModel gameModel = new GameModel();
+        GameView gameView = new GameView();
+        GameController gameController = new GameController(gameModel,gameView);
     }
 
 }

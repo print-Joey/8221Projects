@@ -21,6 +21,11 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 
 public class GameView extends JFrame{
     private final String LOGO_PATH          =       "piccrossNameMin.jpg";
+    private final String NEW_GAME_LOGO_PATH =       "piciconnew.gif";
+    private final String SOLUTION_LOGO_PATH =       "piciconsol.gif";
+    private final String ABOUT_LOGO_PATH    =       "piciconabt.gif";
+    private final String EXIT_LOGO_PATH     =       "piciconext.gif";
+    private final String COLOR_LOGO_PATH    =       "piciconcol.gif";
     private final String POINTS             =       "Points:  ";
     private final String TIME               =       "Time:  ";
     private final String RESET              =       "Reset";
@@ -36,7 +41,7 @@ public class GameView extends JFrame{
 
     //================================================================
 
-    GameView.Controller innerClassControllerObj = new Controller();
+
     //================================================================
     /* members of initMarkPanel()*/
     JPanel              markPanel;
@@ -54,7 +59,7 @@ public class GameView extends JFrame{
 
         //attributes
 
-        markCheckbox.       addActionListener(innerClassControllerObj);
+       // markCheckbox.       addActionListener(innerClassControllerObj);
         markCheckbox.       setBackground(new Color(22, 186, 163));
         markCheckbox.       setFont(new Font("TimesRoman", Font.BOLD, 12));
 
@@ -168,7 +173,7 @@ public class GameView extends JFrame{
                 UnitOfBoardButton[i][j] = new JButton();
                 UnitOfBoardButton[i][j].setPreferredSize(new Dimension(100,100));
                 UnitOfBoardButton[i][j].setBackground(Color.lightGray);
-                UnitOfBoardButton[i][j].addActionListener(innerClassControllerObj);
+                //UnitOfBoardButton[i][j].addActionListener(new GameController());
                 //add all the buttons to the main panel
                 boardMainPanel.         add(UnitOfBoardButton[i][j]);
             }
@@ -256,7 +261,7 @@ public class GameView extends JFrame{
 
 
         //button
-        resetButton.            addActionListener(innerClassControllerObj);
+       // resetButton.            addActionListener(innerClassControllerObj);
         resetPanel.             add(resetButton);
 
 //layouts
@@ -353,6 +358,7 @@ public class GameView extends JFrame{
         splashScreenWindow.setVisible(true);
         try {
             Thread.sleep(time);
+            windowPanel.setVisible(false);
             dispose();
         }catch (InterruptedException e) {
             System.err.print(INTERRUPTED_EXCEPTION);
@@ -360,21 +366,52 @@ public class GameView extends JFrame{
         }
 
     }
+    JMenuItem newGame ;JMenuBar menuBar;
+    JMenuItem solutionMenuItem; JMenuItem exitMenuItem; JMenu gameMenu;
+    JMenu helpMenu; JMenuItem colorsMenuItem; JMenuItem aboutMenuItem;
+
+    public JMenuBar initMenuBar(){
+        menuBar = new JMenuBar();
+        gameMenu = new JMenu("Game");
+        ImageIcon newIcon = new ImageIcon(RESOURCE_PATH + NEW_GAME_LOGO_PATH);
+        newGame = new JMenuItem("New", newIcon);
+        ImageIcon solutionIcon = new ImageIcon(RESOURCE_PATH + SOLUTION_LOGO_PATH);
+        solutionMenuItem = new JMenuItem("Solution", solutionIcon);
+        ImageIcon exitIcon = new ImageIcon(RESOURCE_PATH + EXIT_LOGO_PATH);
+        exitMenuItem = new JMenuItem("Exit", exitIcon);
+        exitMenuItem.addActionListener(new GameController.ExitListener());
+
+        gameMenu.add(newGame);
+        gameMenu.add(solutionMenuItem);
+        gameMenu.add(exitMenuItem);
+
+        helpMenu = new JMenu("Help");
+        ImageIcon colorsIcon = new ImageIcon(RESOURCE_PATH + COLOR_LOGO_PATH);
+        colorsMenuItem = new JMenuItem("Colors", colorsIcon);
+        colorsMenuItem.addActionListener(new GameController.ColorListener());
+        ImageIcon aboutIcon = new ImageIcon(RESOURCE_PATH + ABOUT_LOGO_PATH);
+        aboutMenuItem = new JMenuItem("About", aboutIcon);
+        aboutMenuItem.addActionListener(new GameController.AboutListener());
+        helpMenu.add(colorsMenuItem);
+        helpMenu.add(aboutMenuItem);
+
+        menuBar.add(gameMenu);
+        menuBar.add(helpMenu);
+
+        return menuBar;
+        //mainFrame.setJMenuBar(menuBar);
+    }
     //Con      Constructor flag Using CTRL + f to locate it
     /**
-    * Initiate the game GUI
-    *
-    * @author  Jiayu Lin, Chang Luo
-    * @version 1.0
-    * @since   2021-09-24
-    */
+     * Initiate the game GUI
+     *
+     * @author  Jiayu Lin, Chang Luo
+     * @version 1.0
+     * @since   2021-09-24
+     */
     public GameView() {
 
         displaySplashScreen(1000);
-
-
-
-
 
         EventQueue.invokeLater(new Runnable(){
             @Override
@@ -407,78 +444,11 @@ public class GameView extends JFrame{
                 int y = (screen.height - height) / 2;
                 mainFrame.setBounds(x, y, width, height);
 
-                JMenuBar menu = new JMenuBar();
-                JMenu Game = new JMenu("Game");
-                ImageIcon newIcon = new ImageIcon("piciconnew.gif");
-                JMenuItem newGame = new JMenuItem("New",newIcon);
-                ImageIcon solutionIcon = new ImageIcon("piciconsol.gif");
-                JMenuItem solution = new JMenuItem("Solution",solutionIcon);
-                ImageIcon exitIcon = new ImageIcon("piciconext.gif");
-                JMenuItem exit = new JMenuItem("Exit",exitIcon);
-                exit.addActionListener(new GameController.ExitListener());
-                Game.add(newGame);
-                Game.add(solution);
-                Game.add(exit);
 
-                JMenu Help = new JMenu("Help");
-                ImageIcon colorsIcon = new ImageIcon("piciconcol.gif");
-                JMenuItem colors = new JMenuItem("Colors",colorsIcon);
-                colors.addActionListener(new GameController.ColorListener());
-                ImageIcon aboutIcon = new ImageIcon("piciconabt.gif");
-                JMenuItem about = new JMenuItem("About",aboutIcon);
-                about.addActionListener(new GameController.AboutListener());
-                Help.add(colors);
-                Help.add(about);
 
-                menu.add(Game);
-                menu.add(Help);
-
-                mainFrame.setJMenuBar(menu);
+               mainFrame.setJMenuBar(initMenuBar());
            }
         });
     }
 
-
-
-    protected class Controller implements ActionListener {
-        int markCheckBoxCount = 0;
-        final String RESET_BUTTON_REACTION = "Reset Button pressed!!\n";
-        final String UNCHECK_MARK_CHECKBOX_REACTION = "Check Box \"Mark\" UnChecked!!\n";
-        final String CHECK_MARK_CHECKBOX_REACTION = "Check Box \"Mark\" Checked!!\n";
-        final String BLANK_SPACE = "           ";
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == GameView.this.resetButton) {
-                messageDisplayTextArea.append(BLANK_SPACE+RESET_BUTTON_REACTION);
-
-            } else if (e.getSource() == GameView.this.markCheckbox) {
-                if(markCheckBoxCount % 2 !=0){
-
-                    messageDisplayTextArea.append(BLANK_SPACE+UNCHECK_MARK_CHECKBOX_REACTION);
-                }else{
-                    messageDisplayTextArea.append(BLANK_SPACE+CHECK_MARK_CHECKBOX_REACTION);
-
-                }
-                markCheckBoxCount++;
-            }
-
-
-            for (int i = 0; i < UnitOfBoardButton.length; i++) {
-                for (int j = 0; j < UnitOfBoardButton[i].length; j++) {
-
-                    if(UnitOfBoardButton[i][j].getModel().isArmed()){
-                         int row    = i;
-                         int column = j;
-                         row ++;
-                         column++;
-                        messageDisplayTextArea.append((BLANK_SPACE+"Button"+"["+(row)+","+(column)+"]"+" is Pressed\n"));
-
-                    }
-                }
-
-            }
-
-        }
-
-    }
 }

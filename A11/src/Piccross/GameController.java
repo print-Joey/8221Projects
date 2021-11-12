@@ -5,7 +5,72 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameController {
+public class GameController implements ActionListener {
+    private GameModel gameModel;
+    private GameView gameView;
+
+    public GameController(GameModel gameModel,GameView  gameView) {
+        this.gameModel = gameModel;
+        this.gameView = gameView;
+
+
+    }
+
+
+    //new Game================
+    int markCheckBoxCount = 0;
+    final String RESET_BUTTON_REACTION = "Reset Button pressed!!\n";
+    final String UNCHECK_MARK_CHECKBOX_REACTION = "Check Box \"Mark\" UnChecked!!\n";
+    final String CHECK_MARK_CHECKBOX_REACTION = "Check Box \"Mark\" Checked!!\n";
+    final String BLANK_SPACE = "           ";
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == gameView.resetButton) {
+            gameView.messageDisplayTextArea.append(BLANK_SPACE+RESET_BUTTON_REACTION);
+
+        } else if (e.getSource() == gameView.markCheckbox) {
+            //determine markCheckBoxCount is odd number or even number
+            if(markCheckBoxCount % 2 !=0){
+                //odd number behavior -> mark box unchecked
+                gameView.messageDisplayTextArea.append(UNCHECK_MARK_CHECKBOX_REACTION);
+            }else{
+                //odd number behavior -> mark box checked
+                gameView.messageDisplayTextArea.append(CHECK_MARK_CHECKBOX_REACTION);
+
+            }
+            markCheckBoxCount++;
+            //new Game
+        }else if(e.getSource() == gameView.newGame){
+            gameModel.numberOfRow = 5;
+            gameModel.numberOfColumn = 5;
+            gameModel.initGame();
+
+        }
+
+
+        for (int i = 0; i < gameView.UnitOfBoardButton.length; i++) {
+            for (int j = 0; j < gameView.UnitOfBoardButton[i].length; j++) {
+
+                if(gameView.UnitOfBoardButton[i][j].getModel().isArmed()){
+                    int row    = i;
+                    int column = j;
+                    row ++;
+                    column++;
+                    gameView.messageDisplayTextArea.append((BLANK_SPACE+"Button"+"["+(row)+","+(column)+"]"+" is Pressed\n"));
+
+                }
+            }
+
+        }
+
+    }
+
+
+    //=============================
+
+
+
 
     static class ExitListener implements ActionListener{
 
@@ -84,5 +149,8 @@ public class GameController {
             });
         }
     }
+
+
+
 
 }

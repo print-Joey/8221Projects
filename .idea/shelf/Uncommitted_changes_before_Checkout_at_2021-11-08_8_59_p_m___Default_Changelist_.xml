@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m__[Default_Changelist]" date="1636423201116" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m__[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 2021-11-08 8:59 p.m. [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/A11/Piccross/GameView$1.class" />
+    <option name="AFTER_PATH" value="out/production/A11/Piccross/GameView$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m__[Default_Changelist]/GameView$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/A11/Piccross/GameView$Controller.class" />
+    <option name="AFTER_PATH" value="out/production/A11/Piccross/GameView$Controller.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m__[Default_Changelist]/GameView$Controller.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/A11/Piccross/GameView.class" />
+    <option name="AFTER_PATH" value="out/production/A11/Piccross/GameView.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m__[Default_Changelist]/GameView.class" />
+  </binary>
+</changelist>
