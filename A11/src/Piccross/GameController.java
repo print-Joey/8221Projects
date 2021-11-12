@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.TimerTask;
+import java.util.Timer;
+
 
 public class GameController implements ActionListener {
     private GameModel gameModel;
@@ -17,6 +20,7 @@ public class GameController implements ActionListener {
     final String BLANK_SPACE = "           ";
     final String BLANK_SPACE_CHK_BOX = "        ";
     final String BLANK_SPACE_UNCHK_BOX = "      ";
+
 
     public GameController(GameModel gameModel,GameView  gameView) {
 
@@ -32,11 +36,11 @@ public class GameController implements ActionListener {
                     this.gameView.UnitOfBoardButton[i][j].addActionListener(this);
             }
 
-
-
-//============================
         }
     }
+//============================
+
+
 
 
 
@@ -66,16 +70,26 @@ public class GameController implements ActionListener {
                 //new Game
             } else if (e.getSource() == gameView.newGame) {
                 //Default setting of the game
+                JFrame gameLayoutSetterFrame;
+                gameLayoutSetterFrame = new JFrame();
+                gameLayoutSetterFrame.setTitle("Please set your game Layout");
+                gameLayoutSetterFrame.setLayout(new BorderLayout());
+
+
                 this.gameModel.numberOfRow      = 5;
                 this.gameModel.numberOfColumn   = 5;
                 this.gameModel.initGame();
 
-            } //else if (e.getSource() == this.gameView.)
+            } else if (e.getSource() == this.gameView.solutionMenuItem){
+
+
+
+            }
 
             // Game Board is clicked behaviors
-            for (int i = 0; i < gameView.UnitOfBoardButton.length; i++) {
-                for (int j = 0; j < gameView.UnitOfBoardButton[i].length; j++) {
-
+            for (int i = 0; i < this.gameModel.numberOfRow; i++) {
+                for (int j = 0; j < this.gameModel.numberOfColumn; j++) {
+                    // Responds after Board unit get clicked.
                     if (gameView.UnitOfBoardButton[i][j].getModel().isArmed()) {
                         int row = i;
                         int column = j;
@@ -84,6 +98,16 @@ public class GameController implements ActionListener {
                         gameView.messageDisplayTextArea.append((BLANK_SPACE + "Button" + "[" + (row) + "," + (column) + "]" + " is Pressed!!!\n"));
 
                     }
+                    if(e.getSource()  == this.gameView.newGame){
+                        if(this.gameModel.config[i][j] == 1){
+                            //set color
+                            //this.gameView.UnitOfBoardButton[i][j].set
+                        }else if(this.gameModel.config[i][j] == 0){
+                            //set color
+
+                        }
+                    }
+
                 }
             }
 
@@ -175,7 +199,20 @@ public class GameController implements ActionListener {
         }
     }
 
-
+    private int seconds;    Timer timer;    TimerTask timerTask;
+    public void startTimer() {// Timer task
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                seconds++;// Update your interface
+                gameView.timeTextField.setText(String.valueOf(seconds));
+            }
+        };
+        try {
+            timer.scheduleAtFixedRate(timerTask, 0, 1000);
+        } catch(Exception e) {// Eventual treatment}}
+        }
+    }
 
 
 }
