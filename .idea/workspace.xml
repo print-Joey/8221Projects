@@ -6,10 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="513b098f-bb01-4752-9c97-9988e10a2aa2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/A11/src/Piccross/GameModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_53_p_m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_53_p_m___Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m___Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A11/src/Piccross/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/A11/src/Piccross/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/A11/src/Piccross/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/A11/src/Piccross/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/A11/src/Piccross/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/A11/src/Piccross/GameView.java" afterDir="false" />
     </list>
@@ -102,6 +101,8 @@
       <workItem from="1636646666170" duration="3859000" />
       <workItem from="1636668079657" duration="7053000" />
       <workItem from="1636676983084" duration="8085000" />
+      <workItem from="1636690612121" duration="2337000" />
+      <workItem from="1636738378120" duration="2189000" />
     </task>
     <servers />
   </component>
@@ -121,40 +122,50 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="765" y="223" key="#com.intellij.ide.util.MemberChooser" timestamp="1636612605488">
+    <state x="765" y="223" key="#com.intellij.ide.util.MemberChooser" timestamp="1636687953619">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="223" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636612605488" />
-    <state width="1877" height="345" key="GridCell.Tab.0.bottom" timestamp="1636684669830">
+    <state x="765" y="223" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636687953619" />
+    <state width="1877" height="294" key="GridCell.Tab.0.bottom" timestamp="1636740247689">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="345" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636684669830" />
-    <state width="1877" height="345" key="GridCell.Tab.0.center" timestamp="1636684669829">
+    <state width="1877" height="294" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636740247689" />
+    <state width="1877" height="294" key="GridCell.Tab.0.center" timestamp="1636740247689">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="345" key="GridCell.Tab.0.center/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636684669829" />
-    <state width="1877" height="345" key="GridCell.Tab.0.left" timestamp="1636684669829">
+    <state width="1877" height="294" key="GridCell.Tab.0.center/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636740247689" />
+    <state width="1877" height="294" key="GridCell.Tab.0.left" timestamp="1636740247688">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="345" key="GridCell.Tab.0.left/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636684669829" />
-    <state width="1877" height="345" key="GridCell.Tab.0.right" timestamp="1636684669829">
+    <state width="1877" height="294" key="GridCell.Tab.0.left/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636740247688" />
+    <state width="1877" height="294" key="GridCell.Tab.0.right" timestamp="1636740247689">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="345" key="GridCell.Tab.0.right/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636684669829" />
-    <state x="288" y="215" key="SettingsEditor" timestamp="1636677371080">
+    <state width="1877" height="294" key="GridCell.Tab.0.right/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636740247689" />
+    <state x="258" y="203" key="SettingsEditor" timestamp="1636739833094">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="288" y="215" key="SettingsEditor/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636677371080" />
+    <state x="258" y="203" key="SettingsEditor/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636739833094" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/A11/src/Piccross/Game.java</url>
-          <line>3</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/A11/src/Piccross/GameController.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/A11/src/Piccross/GameController.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Piccross.GameView" memberName="markPanel" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

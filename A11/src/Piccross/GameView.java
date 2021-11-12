@@ -358,8 +358,8 @@ public class GameView extends JFrame{
         splashScreenWindow.setVisible(true);
         try {
             Thread.sleep(time);
-            windowPanel.setVisible(false);
-            dispose();
+
+            splashScreenWindow.dispose();
         }catch (InterruptedException e) {
             System.err.print(INTERRUPTED_EXCEPTION);
 
@@ -402,6 +402,7 @@ public class GameView extends JFrame{
         //mainFrame.setJMenuBar(menuBar);
     }
     //Con      Constructor flag Using CTRL + f to locate it
+
     /**
      * Initiate the game GUI
      *
@@ -409,13 +410,11 @@ public class GameView extends JFrame{
      * @version 1.0
      * @since   2021-09-24
      */
+
     public GameView() {
 
         displaySplashScreen(1000);
 
-        EventQueue.invokeLater(new Runnable(){
-            @Override
-            public void run() {
                 JFrame mainFrame = new JFrame();
                 JPanel gamePanel = new JPanel(new BorderLayout());
 
@@ -424,9 +423,11 @@ public class GameView extends JFrame{
                 gamePanel.add(initControlPanel(), BorderLayout.EAST);
                 gamePanel.add(addLeftAndMarkPanel(), BorderLayout.WEST);
 
+
                 gamePanel.setVisible(true);
 
                 //add all the panels to the main frame
+                 mainFrame.setJMenuBar(initMenuBar());
                 mainFrame.add(gamePanel);
                 mainFrame.pack();
 
@@ -446,9 +447,7 @@ public class GameView extends JFrame{
 
 
 
-               mainFrame.setJMenuBar(initMenuBar());
+
            }
-        });
-    }
 
 }
