@@ -15,16 +15,27 @@ public class GameController implements ActionListener {
     final String UNCHECK_MARK_CHECKBOX_REACTION = "Check Box \"Mark\" UnChecked!!\n";
     final String CHECK_MARK_CHECKBOX_REACTION = "Check Box \"Mark\" Checked!!\n";
     final String BLANK_SPACE = "           ";
+    final String BLANK_SPACE_CHK_BOX = "        ";
+    final String BLANK_SPACE_UNCHK_BOX = "      ";
+
     public GameController(GameModel gameModel,GameView  gameView) {
 
         this.gameModel = gameModel;
         this.gameView = gameView;
-
+//====================
         //add ActionListener
         this.gameView.resetButton.addActionListener(this);
         this.gameView.markCheckbox.addActionListener(this);
 
+        for (int i = 0; i < this.gameView.UnitOfBoardButton.length; i++) {
+            for (int j = 0; j <this.gameView.UnitOfBoardButton[i].length; j++) {
+                    this.gameView.UnitOfBoardButton[i][j].addActionListener(this);
+            }
 
+
+
+//============================
+        }
     }
 
 
@@ -37,42 +48,43 @@ public class GameController implements ActionListener {
         public void actionPerformed (ActionEvent e){
 
             if (e.getSource() == gameView.resetButton) {
-
+                // reset button is clicked
                 gameView.messageDisplayTextArea.append(BLANK_SPACE+RESET_BUTTON_REACTION);
 
             } else if (e.getSource() == gameView.markCheckbox) {
+                //markCheckbox is clicked
                 //determine markCheckBoxCount is odd number or even number
                 if (markCheckBoxCount % 2 != 0) {
                     //odd number behavior -> mark box unchecked
-                    gameView.messageDisplayTextArea.append(UNCHECK_MARK_CHECKBOX_REACTION);
+                    gameView.messageDisplayTextArea.append(BLANK_SPACE_UNCHK_BOX+UNCHECK_MARK_CHECKBOX_REACTION);
                 } else {
                     //odd number behavior -> mark box checked
-                    gameView.messageDisplayTextArea.append(CHECK_MARK_CHECKBOX_REACTION);
+                    gameView.messageDisplayTextArea.append(BLANK_SPACE_CHK_BOX+CHECK_MARK_CHECKBOX_REACTION);
 
                 }
                 markCheckBoxCount++;
                 //new Game
             } else if (e.getSource() == gameView.newGame) {
-                gameModel.numberOfRow = 5;
-                gameModel.numberOfColumn = 5;
-                gameModel.initGame();
+                //Default setting of the game
+                this.gameModel.numberOfRow      = 5;
+                this.gameModel.numberOfColumn   = 5;
+                this.gameModel.initGame();
 
-            }
+            } //else if (e.getSource() == this.gameView.)
 
-
+            // Game Board is clicked behaviors
             for (int i = 0; i < gameView.UnitOfBoardButton.length; i++) {
                 for (int j = 0; j < gameView.UnitOfBoardButton[i].length; j++) {
-                    this.gameView.UnitOfBoardButton[i][j].addActionListener(this);
+
                     if (gameView.UnitOfBoardButton[i][j].getModel().isArmed()) {
                         int row = i;
                         int column = j;
-                        row++;
-                        column++;
-                        gameView.messageDisplayTextArea.append((BLANK_SPACE + "Button" + "[" + (row) + "," + (column) + "]" + " is Pressed\n"));
+                        ++row;
+                        ++column;
+                        gameView.messageDisplayTextArea.append((BLANK_SPACE + "Button" + "[" + (row) + "," + (column) + "]" + " is Pressed!!!\n"));
 
                     }
                 }
-
             }
 
         }
