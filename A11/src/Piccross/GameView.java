@@ -5,7 +5,12 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.SOUTH;
@@ -164,8 +169,9 @@ public class GameView extends JFrame {
     JPanel boardMainPanel;
     JButton[][] UnitOfBoardButton;
 
-    //Set the panel which is used to contain the board
+    int[][] solution = new int[][]{{0,0,1,0,0},{0,0,1,0,0},{1,1,1,1,1},{0,1,1,1,0},{0,1,0,1,0}};
 
+    //Set the panel which is used to contain the board
     /**
      * Returns the JPanel which is used to contain the board of the game
      *
@@ -173,6 +179,7 @@ public class GameView extends JFrame {
      * @version 1.0
      * @since 2021-09-24
      */
+    int pointsCount = 0;
     public JPanel initBoardPanel() {
         boardMainPanel = new JPanel(new GridLayout(numOfRow, numOfColumn, 1, 1));
 
@@ -180,10 +187,44 @@ public class GameView extends JFrame {
 
         for (int i = 0; i < UnitOfBoardButton.length; i++) {
             for (int j = 0; j < UnitOfBoardButton[i].length; j++) {
+                int ii = i;
+                int jj = j;
                 UnitOfBoardButton[i][j] = new JButton();
                 UnitOfBoardButton[i][j].setPreferredSize(new Dimension(100, 100));
                 UnitOfBoardButton[i][j].setBackground(Color.lightGray);
-                //UnitOfBoardButton[i][j].addActionListener(new GameController());
+                //if each unit of button on the board is pressed what happens
+                UnitOfBoardButton[i][j].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        msgDisplayTextArea.append(("           " + "Button" + "[" + ii + "," + jj + "]" + " is Pressed!!!\n"));
+                        if(markCheckbox.isSelected()){
+                            if (solution[ii][jj]==0){
+                                pointsCount++;
+                                UnitOfBoardButton[ii][jj].setBackground(markedColor);
+                                if (pointsCount == 25){
+                                    displaySplashScreen(1000);
+                                    msgDisplayTextArea.append("Perfect Game!\npoints: " +pointsCount+"\nTime: "+seconds);
+                                }
+                            }else{
+                                pointsCount--;
+                                UnitOfBoardButton[ii][jj].setBackground(errorColor);
+                            }
+                        }else {
+                            if (solution[ii][jj] == 1) {
+                                pointsCount++;
+                                UnitOfBoardButton[ii][jj].setBackground(correctColor);
+                                if (pointsCount == 25){
+                                    displaySplashScreen(1000);
+                                    msgDisplayTextArea.append("Perfect Game!\npoints: " +pointsCount+"\nTime: "+seconds);
+                                }
+                            } else {
+                                pointsCount--;
+                                UnitOfBoardButton[ii][jj].setBackground(errorColor);
+                            }
+                        }
+                        pointsTextField.setText(String.valueOf(pointsCount));
+                    }
+                });
                 //add all the buttons to the main panel
                 boardMainPanel.add(UnitOfBoardButton[i][j]);
             }
@@ -218,6 +259,9 @@ public class GameView extends JFrame {
      * @version 1.0
      * @since 2021-09-24
      */
+    int seconds = 0;
+    Timer timer = new Timer();
+    TimerTask timerTask;
     public JPanel initControlPanel() {
         // init all panel in the control panel
         controlMainPanel = new JPanel(new BorderLayout());
@@ -237,6 +281,7 @@ public class GameView extends JFrame {
         timeLabel = new JLabel(TIME);
         resetButton = new JButton(RESET);
         resetPanel = new JPanel();
+
 
 
         //logo panel member and behavior
@@ -269,24 +314,49 @@ public class GameView extends JFrame {
 
 
         //timePanel member and behavior
+        //initiate the timer
         timeTextField = new JTextField("0s", 5);
+
         timePanel.add(timeLabel);
         timePanel.add(timeTextField);
 
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                seconds++;
+                timeTextField.setText(String.valueOf(seconds)+"s");
+            }
+        };
+
+        timer.schedule(timerTask,0,1000);
 
         //button
-        // resetButton.            addActionListener(innerClassControllerObj);
+        resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                msgDisplayTextArea.setText("");
+                msgDisplayTextArea.append("           Reset Button Pressed!!\n");
+                pointsCount = 0;
+                pointsTextField.setText("0");
+                seconds = 0;
+                for (int i = 0;i<5;i++){
+                    for (int j = 0;j<5;j++){
+                        UnitOfBoardButton[i][j].setBackground(Color.lightGray);
+                    }
+                }
+            }
+        });
         resetPanel.add(resetButton);
 
 //layouts
         northPanel.add(logoPanel, BorderLayout.NORTH);
-        northPanel.add(pointsDisplayPanel, BorderLayout.CENTER);
+        northPanel.add(pointsDisplayPanel, CENTER);
         southPanel.add(timePanel, BorderLayout.NORTH);
-        southPanel.add(resetPanel, BorderLayout.CENTER);
+        southPanel.add(resetPanel, CENTER);
 
         controlMainPanel.add(northPanel, BorderLayout.NORTH);
         controlMainPanel.add(msgDisplayScrollPane);
-        controlMainPanel.add(southPanel, BorderLayout.SOUTH);
+        controlMainPanel.add(southPanel, SOUTH);
 
 
         controlMainPanel.setBorder(new EmptyBorder(25, 0, 0, 0));
@@ -406,11 +476,39 @@ public class GameView extends JFrame {
         gameMenu = new JMenu("Game");
         ImageIcon newIcon = new ImageIcon(RESOURCE_PATH + NEW_GAME_LOGO_PATH);
         newGame = new JMenuItem("New", newIcon);
+        newGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (int i =0;i<5;i++){
+                    for (int j = 0;j<5;j++){
+                        solution[i][j] = new Random().nextInt(2);
+                        UnitOfBoardButton[i][j].setBackground(Color.lightGray);
+                        msgDisplayTextArea.setText("");
+                        pointsCount = 0;
+                        pointsTextField.setText("0");
+                        seconds = 0;
+                    }
+                }
+            }
+        });
         ImageIcon solutionIcon = new ImageIcon(RESOURCE_PATH + SOLUTION_LOGO_PATH);
         solutionMenuItem = new JMenuItem("Solution", solutionIcon);
+        solutionMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                msgDisplayTextArea.append("Solution:\n");
+                for (int i= 0;i<solution.length;i++) {
+                    for (int j = 0; j < 5; j++) {
+                        msgDisplayTextArea.append(String.valueOf(solution[i][j]));
+                    }
+                    msgDisplayTextArea.append("\n");
+                }
+
+            }
+        });
         ImageIcon exitIcon = new ImageIcon(RESOURCE_PATH + EXIT_LOGO_PATH);
         exitMenuItem = new JMenuItem("Exit", exitIcon);
-
+        exitMenuItem.addActionListener(new GameController.ExitListener());
 
 
         gameMenu.add(newGame);
@@ -420,15 +518,18 @@ public class GameView extends JFrame {
         helpMenu = new JMenu("Help");
         ImageIcon colorsIcon = new ImageIcon(RESOURCE_PATH + COLOR_LOGO_PATH);
         colorsMenuItem = new JMenuItem("Colors", colorsIcon);
-
+        colorsMenuItem.addActionListener(new GameController.ColorListener());
         ImageIcon aboutIcon = new ImageIcon(RESOURCE_PATH + ABOUT_LOGO_PATH);
         aboutMenuItem = new JMenuItem("About", aboutIcon);
+        aboutMenuItem.addActionListener(new GameController.AboutListener());
         helpMenu.add(colorsMenuItem);
         helpMenu.add(aboutMenuItem);
 
         newGame.setMnemonic(KeyEvent.VK_N);
         solutionMenuItem.setMnemonic(KeyEvent.VK_S);
         exitMenuItem.setMnemonic(KeyEvent.VK_E);
+        colorsMenuItem.setMnemonic(KeyEvent.VK_C);
+        aboutMenuItem.setMnemonic(KeyEvent.VK_A);
         menuBar.add(gameMenu);
         menuBar.add(helpMenu);
 
@@ -447,43 +548,43 @@ public class GameView extends JFrame {
     JPanel jerrorColor;
     JFrame colorFrame;
     public void initColorChooser(){
-    //JDialog colorDialog = new JDialog();
-  colorFrame = new JFrame("Color Model");
-                colorFrame.setSize(500,200);
-                //colorFrame.setAlwaysOnTop(true);
-                colorFrame.setVisible(true);
+        //JDialog colorDialog = new JDialog();
+        colorFrame = new JFrame("Color Model");
+        colorFrame.setSize(500,200);
+        //colorFrame.setAlwaysOnTop(true);
+        colorFrame.setVisible(true);
 
-                colorFrame.setLayout(new
+        colorFrame.setLayout(new
 
-    GridLayout(2,3));
-     jcorrectColor = new JPanel();
-   jmarkedColor = new JPanel();
-    jerrorColor = new JPanel();
+                GridLayout(2,3));
+        jcorrectColor = new JPanel();
+        jmarkedColor = new JPanel();
+        jerrorColor = new JPanel();
 
 
-    correctColorButton =new
+        correctColorButton =new
 
-    JButton("Color1:Correct");
+                JButton("Color1:Correct");
 
-    markedColorButton =new
+        markedColorButton =new
 
-    JButton("Color2:Marked");
+                JButton("Color2:Marked");
 
-    errorColorButton =new
+        errorColorButton =new
 
-    JButton("Color3:Error");
+                JButton("Color3:Error");
 
-                colorFrame.add(jcorrectColor);
-                colorFrame.add(jmarkedColor);
-                colorFrame.add(jerrorColor);
-                colorFrame.add(correctColorButton);
-                colorFrame.add(markedColorButton);
-                colorFrame.add(errorColorButton);
+        colorFrame.add(jcorrectColor);
+        colorFrame.add(jmarkedColor);
+        colorFrame.add(jerrorColor);
+        colorFrame.add(correctColorButton);
+        colorFrame.add(markedColorButton);
+        colorFrame.add(errorColorButton);
 
-                jcorrectColor.setBackground(correctColor);
-                jmarkedColor.setBackground(markedColor);
-                jerrorColor.setBackground(errorColor);
-                //colorFrame.set(false);
+        jcorrectColor.setBackground(correctColor);
+        jmarkedColor.setBackground(markedColor);
+        jerrorColor.setBackground(errorColor);
+        //colorFrame.set(false);
 
         //Making the Game window centralized
         int width = colorFrame.getWidth();
@@ -492,13 +593,25 @@ public class GameView extends JFrame {
         int x = (screen.width - width) / 2;
         int y = (screen.height - height) / 2;
         colorFrame.setBounds(x, y, width, height);
-}
+    }
 
-public void updateTopPanelView(){
+    public void updateTopPanelView(){
 
 
 
-}
+    }
+
+    public void setCorrectColor(Color cc){
+        correctColor = cc;
+    }
+
+    public void setErrorColor(Color ec){
+        errorColor = ec;
+    }
+
+    public void setMarkedColor(Color mc){
+        correctColor = mc;
+    }
     //Con      Constructor flag Using CTRL + f to locate it
 
     /**
@@ -515,39 +628,38 @@ public void updateTopPanelView(){
         displaySplashScreen(1000);
 
 
-                 mainFrame = new JFrame();
-                 gamePanel = new JPanel(new BorderLayout());
+        mainFrame = new JFrame();
+        gamePanel = new JPanel(new BorderLayout());
 
-                //combine all the panels together
-                gamePanel.add(addTopAndBoardPanel(), BorderLayout.CENTER);
-                gamePanel.add(initControlPanel(), BorderLayout.EAST);
-                gamePanel.add(addLeftAndMarkPanel(), BorderLayout.WEST);
-
-
-                gamePanel.setVisible(true);
-
-                //add all the panels to the main frame
-                mainFrame.setJMenuBar(initMenuBar());
-                mainFrame.add(gamePanel);
-                mainFrame.pack();
-
-                mainFrame.setVisible(true);
-                mainFrame.setResizable(false);
-                mainFrame.setTitle(TITLE);
-                mainFrame.setBackground(Color.BLACK);
-                mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-                //Making the Game window centralized
-                int width = mainFrame.getWidth();
-                int height = mainFrame.getHeight();
-                Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-                int x = (screen.width - width) / 2;
-                int y = (screen.height - height) / 2;
-                mainFrame.setBounds(x, y, width, height);
+        //combine all the panels together
+        gamePanel.add(addTopAndBoardPanel(), BorderLayout.CENTER);
+        gamePanel.add(initControlPanel(), BorderLayout.EAST);
+        gamePanel.add(addLeftAndMarkPanel(), BorderLayout.WEST);
 
 
+        gamePanel.setVisible(true);
+
+        //add all the panels to the main frame
+        mainFrame.setJMenuBar(initMenuBar());
+        mainFrame.add(gamePanel);
+        mainFrame.pack();
+
+        mainFrame.setVisible(true);
+        mainFrame.setResizable(false);
+        mainFrame.setTitle(TITLE);
+        mainFrame.setBackground(Color.BLACK);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Making the Game window centralized
+        int width = mainFrame.getWidth();
+        int height = mainFrame.getHeight();
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screen.width - width) / 2;
+        int y = (screen.height - height) / 2;
+        mainFrame.setBounds(x, y, width, height);
 
 
-           }
+
+    }
 
 }

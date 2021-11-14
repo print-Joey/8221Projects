@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_53_p_m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_53_p_m___Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m___Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/A11/src/Piccross/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/A11/src/Piccross/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/A11/src/Piccross/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/A11/src/Piccross/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/A11/src/Piccross/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/A11/src/Piccross/GameView.java" afterDir="false" />
     </list>
@@ -27,6 +28,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="20hDgaLGug1LD6vuZsqL2SWyQkl" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,12 +43,26 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Application.Game">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Piccross.Game" />
       <module name="21F_JAP_IDE_Path" />
@@ -62,19 +85,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -103,6 +113,7 @@
       <workItem from="1636676983084" duration="8085000" />
       <workItem from="1636690612121" duration="2337000" />
       <workItem from="1636738378120" duration="2189000" />
+      <workItem from="1636838652821" duration="17902000" />
     </task>
     <servers />
   </component>
@@ -121,47 +132,7 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="765" y="223" key="#com.intellij.ide.util.MemberChooser" timestamp="1636687953619">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="765" y="223" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636687953619" />
-    <state width="1877" height="294" key="GridCell.Tab.0.bottom" timestamp="1636740247689">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="294" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636740247689" />
-    <state width="1877" height="294" key="GridCell.Tab.0.center" timestamp="1636740247689">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="294" key="GridCell.Tab.0.center/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636740247689" />
-    <state width="1877" height="294" key="GridCell.Tab.0.left" timestamp="1636740247688">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="294" key="GridCell.Tab.0.left/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636740247688" />
-    <state width="1877" height="294" key="GridCell.Tab.0.right" timestamp="1636740247689">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="294" key="GridCell.Tab.0.right/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636740247689" />
-    <state x="258" y="203" key="SettingsEditor" timestamp="1636739833094">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="258" y="203" key="SettingsEditor/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1636739833094" />
-  </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/A11/src/Piccross/GameController.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/A11/src/Piccross/GameController.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Piccross.GameView" memberName="markPanel" />

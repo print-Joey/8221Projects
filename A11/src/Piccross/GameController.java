@@ -53,17 +53,17 @@ public class GameController implements ActionListener {
 
             if (e.getSource() == gameView.resetButton) {
                 // reset button is clicked
-                gameView.messageDisplayTextArea.append(BLANK_SPACE+RESET_BUTTON_REACTION);
+                gameView.msgDisplayTextArea.append(BLANK_SPACE+RESET_BUTTON_REACTION);
 
             } else if (e.getSource() == gameView.markCheckbox) {
                 //markCheckbox is clicked
                 //determine markCheckBoxCount is odd number or even number
                 if (markCheckBoxCount % 2 != 0) {
                     //odd number behavior -> mark box unchecked
-                    gameView.messageDisplayTextArea.append(BLANK_SPACE_UNCHK_BOX+UNCHECK_MARK_CHECKBOX_REACTION);
+                    gameView.msgDisplayTextArea.append(BLANK_SPACE_UNCHK_BOX+UNCHECK_MARK_CHECKBOX_REACTION);
                 } else {
                     //odd number behavior -> mark box checked
-                    gameView.messageDisplayTextArea.append(BLANK_SPACE_CHK_BOX+CHECK_MARK_CHECKBOX_REACTION);
+                    gameView.msgDisplayTextArea.append(BLANK_SPACE_CHK_BOX+CHECK_MARK_CHECKBOX_REACTION);
 
                 }
                 markCheckBoxCount++;
@@ -95,16 +95,16 @@ public class GameController implements ActionListener {
                         int column = j;
                         ++row;
                         ++column;
-                        gameView.messageDisplayTextArea.append((BLANK_SPACE + "Button" + "[" + (row) + "," + (column) + "]" + " is Pressed!!!\n"));
+                        gameView.msgDisplayTextArea.append((BLANK_SPACE + "Button" + "[" + (row) + "," + (column) + "]" + " is Pressed!!!\n"));
 
                     }
                     if(e.getSource()  == this.gameView.newGame){
                         if(this.gameModel.config[i][j] == 1){
                             //set color
-                            //this.gameView.UnitOfBoardButton[i][j].set
+                            this.gameView.UnitOfBoardButton[i][j].setBackground(this.gameView.correctColor);
                         }else if(this.gameModel.config[i][j] == 0){
                             //set color
-
+                            this.gameView.UnitOfBoardButton[i][j].setBackground(this.gameView.errorColor);
                         }
                     }
 
@@ -118,7 +118,13 @@ public class GameController implements ActionListener {
 
     //=============================
 
+    static class ButtonListener implements ActionListener{
 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
 
 
     static class ExitListener implements ActionListener{
@@ -167,6 +173,10 @@ public class GameController implements ActionListener {
             markedColor.setBackground(Color.yellow);
             errorColor.setBackground(Color.red);
 
+            Color correct = correctColor.getBackground();
+            Color marked = correctColor.getBackground();
+            Color error = correctColor.getBackground();
+
             correctColorButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -174,6 +184,7 @@ public class GameController implements ActionListener {
                     Color newCorrectColor = JColorChooser.showDialog(null,"Color chooser",Color.green);
 
                     correctColor.setBackground(newCorrectColor);
+
                 }
             });
 
@@ -184,6 +195,7 @@ public class GameController implements ActionListener {
                     Color newMarkedColor = JColorChooser.showDialog(null,"Color chooser",Color.yellow);
 
                     markedColor.setBackground(newMarkedColor);
+
                 }
             });
 
