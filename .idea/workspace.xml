@@ -6,11 +6,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="513b098f-bb01-4752-9c97-9988e10a2aa2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_53_p_m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_53_p_m___Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m___Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_53_p_m__[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_53_p_m___Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m__[Default_Changelist]/GameView$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m__[Default_Changelist]/GameView$Controller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m__[Default_Changelist]/GameView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m__[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021-11-08_8_59_p_m___Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/A11/src/Piccross/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/A11/src/Piccross/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/A11/src/Piccross/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/A11/src/Piccross/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/A11/src/Piccross/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/A11/src/Piccross/GameModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/A11/src/Piccross/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/A11/src/Piccross/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +32,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="3cbdeda4812874c0b636f11c6e79eae832f0d0d6" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -47,22 +58,10 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Application.Game">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Piccross.Game" />
       <module name="21F_JAP_IDE_Path" />
@@ -114,6 +113,7 @@
       <workItem from="1636690612121" duration="2337000" />
       <workItem from="1636738378120" duration="2189000" />
       <workItem from="1636838652821" duration="17902000" />
+      <workItem from="1637621220097" duration="22838000" />
     </task>
     <servers />
   </component>
@@ -131,6 +131,36 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1243" y="227" key="#com.intellij.ide.util.MemberChooser" timestamp="1637639103327">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1243" y="227" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1637639103327" />
+    <state width="1877" height="283" key="GridCell.Tab.0.bottom" timestamp="1637646518204">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="283" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1637646518204" />
+    <state width="1877" height="283" key="GridCell.Tab.0.center" timestamp="1637646518204">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="283" key="GridCell.Tab.0.center/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1637646518204" />
+    <state width="1877" height="283" key="GridCell.Tab.0.left" timestamp="1637646518204">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="283" key="GridCell.Tab.0.left/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1637646518204" />
+    <state width="1877" height="283" key="GridCell.Tab.0.right" timestamp="1637646518204">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="283" key="GridCell.Tab.0.right/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1637646518204" />
+    <state x="-1081" y="-11" width="743" height="792" maximized="true" key="dock-window-1" timestamp="1637645064044">
+      <screen x="-1366" y="0" width="1366" height="728" />
+    </state>
+    <state x="-1081" y="-11" width="743" height="792" maximized="true" key="dock-window-1/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1637645064044" />
+    <state x="690" y="295" key="extract.method.dialog" timestamp="1637632545019">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="295" key="extract.method.dialog/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1637632545019" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

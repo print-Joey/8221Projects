@@ -6,6 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.TimerTask;
 import java.util.Timer;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 public class GameController implements ActionListener {
@@ -20,27 +24,47 @@ public class GameController implements ActionListener {
     final String BLANK_SPACE = "           ";
     final String BLANK_SPACE_CHK_BOX = "        ";
     final String BLANK_SPACE_UNCHK_BOX = "      ";
-
+    private final String RESOURCE_PATH = "A11\\src\\Piccross\\Resource\\";
+    String DIALOG_IMAGE = "piccross.png";
+    final String AUTHOR_SIGNATURE = "Lin,Jiayu/Luo,Chang's Piccross Game ";
+    int pointsCount = 0;
 
     public GameController(GameModel gameModel,GameView  gameView) {
 
         this.gameModel = gameModel;
         this.gameView = gameView;
-//====================
+        addActionListener();
+
+        this.startTimer();
+    }
+
+
+    private void addActionListener(){
+
+
         //add ActionListener
         this.gameView.resetButton.addActionListener(this);
         this.gameView.markCheckbox.addActionListener(this);
+        this.gameView.colorsMenuItem.addActionListener(this);
+        this.gameView.aboutMenuItem.addActionListener(this);
+        this.gameView.exitMenuItem.addActionListener(this);
+        this.gameView.newGame.addActionListener(this);
+        this.gameView.solutionMenuItem.addActionListener(this);
+
+
+//=================================================================================
 
         for (int i = 0; i < this.gameView.UnitOfBoardButton.length; i++) {
             for (int j = 0; j <this.gameView.UnitOfBoardButton[i].length; j++) {
-                    this.gameView.UnitOfBoardButton[i][j].addActionListener(this);
+                this.gameView.UnitOfBoardButton[i][j].addActionListener(this);
             }
 
         }
+//=================================================================================
+
+
+
     }
-//============================
-
-
 
 
 
@@ -54,6 +78,8 @@ public class GameController implements ActionListener {
             if (e.getSource() == gameView.resetButton) {
                 // reset button is clicked
                 gameView.msgDisplayTextArea.append(BLANK_SPACE+RESET_BUTTON_REACTION);
+
+                resetGame();
 
             } else if (e.getSource() == gameView.markCheckbox) {
                 //markCheckbox is clicked
@@ -70,158 +96,118 @@ public class GameController implements ActionListener {
                 //new Game
             } else if (e.getSource() == gameView.newGame) {
                 //Default setting of the game
-                JFrame gameLayoutSetterFrame;
-                gameLayoutSetterFrame = new JFrame();
-                gameLayoutSetterFrame.setTitle("Please set your game Layout");
-                gameLayoutSetterFrame.setLayout(new BorderLayout());
-
-
-                this.gameModel.numberOfRow      = 5;
-                this.gameModel.numberOfColumn   = 5;
                 this.gameModel.initGame();
+
+                resetGame();
 
             } else if (e.getSource() == this.gameView.solutionMenuItem){
 
+                this.gameView.msgDisplayTextArea.append(this.gameModel.solutionTokenizer());
 
+            }else if(e.getSource() == this.gameView.colorsMenuItem){
 
+                this.gameView.initColorChooser();
+                this.gameView.correctColorButton.addActionListener(this);
+                this.gameView.markedColorButton.addActionListener(this);
+                this.gameView.errorColorButton.addActionListener(this);
+            }else if(e.getSource() == this.gameView.exitMenuItem){
+
+                System.exit(0);
+
+            }else if(e.getSource() == this.gameView.aboutMenuItem){
+                JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(RESOURCE_PATH+DIALOG_IMAGE),AUTHOR_SIGNATURE,JOptionPane.PLAIN_MESSAGE);
+
+            }else if(e.getSource() == this.gameView.correctColorButton){
+                this.gameView.initCorrectColorChooser();
+            }else if(e.getSource() == this.gameView.markedColorButton){
+                this.gameView.initMarkedColorChooser();
+            }else if(e.getSource() == this.gameView.errorColorButton){
+                this.gameView.initErrorColorChooser();
             }
 
             // Game Board is clicked behaviors
             for (int i = 0; i < this.gameModel.numberOfRow; i++) {
                 for (int j = 0; j < this.gameModel.numberOfColumn; j++) {
                     // Responds after Board unit get clicked.
-                    if (gameView.UnitOfBoardButton[i][j].getModel().isArmed()) {
+                    if (this.gameView.UnitOfBoardButton[i][j].getModel().isArmed()) {
                         int row = i;
                         int column = j;
-                        ++row;
-                        ++column;
-                        gameView.msgDisplayTextArea.append((BLANK_SPACE + "Button" + "[" + (row) + "," + (column) + "]" + " is Pressed!!!\n"));
 
-                    }
-                    if(e.getSource()  == this.gameView.newGame){
-                        if(this.gameModel.config[i][j] == 1){
-                            //set color
-                            this.gameView.UnitOfBoardButton[i][j].setBackground(this.gameView.correctColor);
-                        }else if(this.gameModel.config[i][j] == 0){
-                            //set color
-                            this.gameView.UnitOfBoardButton[i][j].setBackground(this.gameView.errorColor);
+                        gameView.msgDisplayTextArea.append((BLANK_SPACE + "Button" + "[" + (++row) + "," + (++column) + "]" + " is Pressed!!!\n"));
+                        if(this.gameView.markCheckbox.isSelected()){
+                            //if configuration match the belonging pattern,
+                            if(this.gameModel.config[i][j] == 1){
+                                // point +1
+                                ++pointsCount;
+                                this.gameView.UnitOfBoardButton[i][j].setBackground(this.gameView.markedColor);
+
+
+                            if(this.gameModel.config[i][j] == 0){
+                                    --pointsCount;
+                                    this.gameView.UnitOfBoardButton[i][j].setBackground(this.gameView.errorColor);
+                                }
+                            }
+
+
+                        }else{
+                                if(this.gameModel.config[i][j] == 1){
+                                    ++pointsCount;
+                                    this.gameView.UnitOfBoardButton[i][j].setBackground(this.gameView.correctColor);
+
+
+                                }
+                                if(this.gameModel.config[i][j] == 0){
+                                    --pointsCount;
+                                    this.gameView.UnitOfBoardButton[i][j].setBackground(this.gameView.errorColor);
+                                }
+
                         }
+                        if (pointsCount == 25){
+                            //displaySplashScreen(1000);
+                            this.gameView.msgDisplayTextArea.append("Perfect Game!\npoints: " +pointsCount+"\nTime: "+seconds);
+                        }
+                        this.gameView.pointsTextField.setText(String.valueOf(pointsCount));
                     }
+
 
                 }
             }
 
         }
 
+    private void resetGame() {
+        this.gameView.msgDisplayTextArea.setText("");
+        this.gameView.pointsTextField.setText("0");
+        pointsCount = 0;
+        seconds = 0;
 
-
-
-    //=============================
-
-    static class ButtonListener implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
+        for (int i = 0;i<this.gameModel.numberOfColumn;i++){
+            for (int j = 0;j<this.gameModel.numberOfColumn;j++){
+                this.gameView.UnitOfBoardButton[i][j].setBackground(Color.lightGray);
+            }
         }
+
+        this.gameView.columnLabelString = this.gameModel.columnNumLabelArray;
+        this.gameView.rowLabelString = this.gameModel.rowNumLabelArray;
+        this.gameModel.printResult();
+       this.gameView.updatetopView();
     }
 
 
-    static class ExitListener implements ActionListener{
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.exit(0);
-        }
-    }
 
-    static class AboutListener implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null,"Chang luo and Jiayu Lin's Piccross");
-        }
-    }
-
-    static class ColorListener implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //JDialog colorDialog = new JDialog();
-            JFrame colorFrame = new JFrame("Color Model");
-            colorFrame.setSize(500,200);
-            colorFrame.setAlwaysOnTop(true);
-            colorFrame.setVisible(true);
-
-            colorFrame.setLayout(new GridLayout(2,3));
-            JPanel correctColor = new JPanel();
-            JPanel markedColor = new JPanel();
-            JPanel errorColor = new JPanel();
-
-            JButton correctColorButton = new JButton("Color1:Correct");
-            JButton markedColorButton = new JButton("Color2:Marked");
-            JButton errorColorButton = new JButton("Color3:Error");
-
-            colorFrame.add(correctColor);
-            colorFrame.add(markedColor);
-            colorFrame.add(errorColor);
-            colorFrame.add(correctColorButton);
-            colorFrame.add(markedColorButton);
-            colorFrame.add(errorColorButton);
-
-            correctColor.setBackground(Color.green);
-            markedColor.setBackground(Color.yellow);
-            errorColor.setBackground(Color.red);
-
-            Color correct = correctColor.getBackground();
-            Color marked = correctColor.getBackground();
-            Color error = correctColor.getBackground();
-
-            correctColorButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JColorChooser correctColorChooser = new JColorChooser();
-                    Color newCorrectColor = JColorChooser.showDialog(null,"Color chooser",Color.green);
-
-                    correctColor.setBackground(newCorrectColor);
-
-                }
-            });
-
-            markedColorButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JColorChooser markedColorChooser = new JColorChooser();
-                    Color newMarkedColor = JColorChooser.showDialog(null,"Color chooser",Color.yellow);
-
-                    markedColor.setBackground(newMarkedColor);
-
-                }
-            });
-
-            errorColorButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JColorChooser errorColorChooser = new JColorChooser();
-                    Color newErrorColor = JColorChooser.showDialog(null,"Color chooser",Color.red);
-
-                    errorColor.setBackground(newErrorColor);
-                }
-            });
-        }
-    }
-
-    private int seconds;    Timer timer;    TimerTask timerTask;
+    private int seconds;    ScheduledExecutorService timer;    Runnable task;
     public void startTimer() {// Timer task
-        timerTask = new TimerTask() {
+        timer = Executors.newSingleThreadScheduledExecutor();
+        task = new Runnable() {
             @Override
             public void run() {
                 seconds++;// Update your interface
-                gameView.timeTextField.setText(String.valueOf(seconds));
+                gameView.timeTextField.setText((seconds)+"s");
             }
         };
         try {
-            timer.scheduleAtFixedRate(timerTask, 0, 1000);
+            timer.scheduleAtFixedRate(task,0,1, TimeUnit.SECONDS);
         } catch(Exception e) {// Eventual treatment}}
         }
     }

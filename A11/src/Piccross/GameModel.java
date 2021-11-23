@@ -4,36 +4,36 @@ import java.util.Random;
 
 public class GameModel {
 
-    public int numberOfRow;
+    public int numberOfRow ;
     public int numberOfColumn;
 
-    int[][] config = new int[numberOfRow][numberOfColumn];
+    int[][] config ;
 
-    public String[] rowNumLabelArray = new String[numberOfRow];
-    public String[] columnNumLabelArray = new String[numberOfColumn];
+    public String[] rowNumLabelArray;
+    public String[] columnNumLabelArray;
 
     public GameModel(){
     initGame();
 
-    calculateColumnLabelArray();
-    calculateRowLabelArray();
-    printResult();
-
     }
 
     public  void initGame() {
-
+        numberOfColumn =5;
+        numberOfRow =5;
+        config = new int[numberOfRow][numberOfColumn];
         for (int i = 0; i < numberOfRow; i++) {
             for (int j = 0; j < numberOfColumn; j++) {
                 config[i][j] = new Random().nextInt(2);
             }
         }
-
+        calculateColumnLabelArray();
+        calculateRowLabelArray();
 
 
     }
 
     public void calculateRowLabelArray(){
+        rowNumLabelArray = new String[numberOfRow];
         int accumulatedRowValue = 0;
         for (int i = 0; i < numberOfRow; i++) {
             rowNumLabelArray[i] = "";
@@ -63,6 +63,7 @@ public class GameModel {
     }
 
     public void calculateColumnLabelArray(){
+        columnNumLabelArray = new String[numberOfColumn];
         int accumulatedColumnValue = 0;
         for (int j = 0; j < numberOfColumn; j++)  {
             columnNumLabelArray[j] = "";
@@ -91,6 +92,18 @@ public class GameModel {
 
 
 
+    public String solutionTokenizer() {
+        String solutionString = "";
+        solutionString += "                        Solution:\n                          ";
+        for (int i = 0; i < numberOfRow; i++) {
+            for (int j = 0; j < numberOfColumn; j++) {
+                solutionString += config[i][j];
+            }
+            solutionString += "\n                          ";
+        }
+        solutionString +="\n";
+        return solutionString;
+    }
     public void printResult() {
         for (int i = 0; i < numberOfRow; i++) {
             for (int j = 0; j < numberOfColumn; j++) {
@@ -109,7 +122,4 @@ public class GameModel {
         }
     }
 
-    public static void main(String[] args) {
-        GameModel gm = new GameModel();
-    }
 }
