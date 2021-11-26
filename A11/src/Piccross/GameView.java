@@ -4,8 +4,10 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.ImageObserver;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,25 +23,26 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 
 
 public class GameView extends JFrame {
-    private final String LOGO_PATH = "piccrossNameMin.jpg";
-    private final String NEW_GAME_LOGO_PATH = "piciconnew.gif";
-    private final String SOLUTION_LOGO_PATH = "piciconsol.gif";
-    private final String ABOUT_LOGO_PATH = "piciconabt.gif";
-    private final String EXIT_LOGO_PATH = "piciconext.gif";
-    private final String COLOR_LOGO_PATH = "piciconcol.gif";
-    private final String POINTS = "Points:  ";
-    private final String TIME = "Time:  ";
-    private final String RESET = "Reset";
-    private final String FILE_NOT_FOUND = "File not found!!";
-    private final String TITLE = "Piccross";
-    private final int NUMS_LABEL_OF_TOP_PANEL
-            = 5;
-    private final int NUMS_LABEL_OF_LEFT_PANEL
-            = 5;
-    private final int NUM_ROWS = 5;
-    private final int NUM_COlUMNS = 5;
-    private final String RESOURCE_PATH = "A11\\src\\Piccross\\Resource\\";
+    //Constants
+    private final String AUTHOR_SIGNATURE                                     = "Lin,Jiayu/Luo,Chang's Piccross Game Staring....";
+    private final String INTERRUPTED_EXCEPTION                                = "InterruptedException!!";
+    private final String POINTS                                               = "Points:  ";
+    private final String TIME                                                 = "Time:  ";
+    private final String RESET                                                = "Reset";
+    private final String FILE_NOT_FOUND                                       = "File not found!!";
+    private final String TITLE                                                = "Piccross";
 
+    private final String LOGO_PATH                                            = "piccrossNameMin.jpg";
+    private final String NEW_GAME_LOGO_PATH                                   = "piciconnew.gif";
+    private final String SOLUTION_LOGO_PATH                                   = "piciconsol.gif";
+    private final String ABOUT_LOGO_PATH                                      = "piciconabt.gif";
+    private final String EXIT_LOGO_PATH                                       = "piciconext.gif";
+    private final String COLOR_LOGO_PATH                                      = "piciconcol.gif";
+    private final String SPLASH_IMAGE_PATH                                    = "piccrossLogo.jpg";
+
+
+    private final String RESOURCE_PATH = "A11\\src\\Piccross\\Resource\\";
+private final String MAIN_FRAME_ICON = "icon.jpg";
     //================================================================
 
 
@@ -79,7 +82,7 @@ public class GameView extends JFrame {
     JPanel topMainPanel;
     JLabel[] labelsOfTopPanel;
     JPanel[] columnOfLabelPanel;
-    String[] columnLabelString = new String[]{"1,1", "3", "1,3", "2,1", "0"};
+    String[] columnLabelString = new String[]{"", "", "", "", ""};
     int numOfColumn = 5;
     //Set the panel which appears on the top
 
@@ -124,7 +127,7 @@ public class GameView extends JFrame {
     JLabel[] labelsOfLeftPanel;
     JPanel[] rowOfLabelPanel;
     int numOfRow = 5;
-    String[] rowLabelString = new String[]{"1,1", "1,1", "4", "2", "2"};
+    String[] rowLabelString = new String[]{"", "", "", "", ""};
     //Initiate the panel on the left
 
     /**
@@ -141,7 +144,7 @@ public class GameView extends JFrame {
         leftMainPanel = new JPanel(new GridLayout(numOfRow, 1));
         labelsOfLeftPanel = new JLabel[numOfRow];
         rowOfLabelPanel = new JPanel[numOfRow];
-        // Make it constant for UI now, Will change to variable after implementing logic.
+
 
 
         for (int i = 0; i < rowLabelString.length; i++) {
@@ -164,9 +167,9 @@ public class GameView extends JFrame {
 
     /* members of initBoardPanel()*/
     JPanel boardMainPanel;
-    JButton[][] UnitOfBoardButton;
+    JButton[][] unitOfBoardButton;
 
-    int[][] solution = new int[][]{{0,0,1,0,0},{0,0,1,0,0},{1,1,1,1,1},{0,1,1,1,0},{0,1,0,1,0}};
+
 
     //Set the panel which is used to contain the board
     /**
@@ -180,57 +183,18 @@ public class GameView extends JFrame {
     public JPanel initBoardPanel() {
         boardMainPanel = new JPanel(new GridLayout(numOfRow, numOfColumn, 1, 1));
 
-        UnitOfBoardButton = new JButton[numOfRow][numOfColumn];
+        unitOfBoardButton = new JButton[numOfRow][numOfColumn];
 
-        for (int i = 0; i < UnitOfBoardButton.length; i++) {
-            for (int j = 0; j < UnitOfBoardButton[i].length; j++) {
-             //   int ii = i;
-              //  int jj = j;
-                UnitOfBoardButton[i][j] = new JButton();
-                UnitOfBoardButton[i][j].setPreferredSize(new Dimension(100, 100));
-                UnitOfBoardButton[i][j].setBackground(Color.lightGray);
-                //if each unit of button on the board is pressed what happens
-
-//======================================================================================================
-                //Code violate MVC architecture,
-
-//                UnitOfBoardButton[i][j].addActionListener(new ActionListener() {
-//                    @Override
-//                    public void actionPerformed(ActionEvent e) {
-//                        msgDisplayTextArea.append(("           " + "Button" + "[" + i + "," + j + "]" + " is Pressed!!!\n"));
-//                        if(markCheckbox.isSelected()){
-//                            if (solution[ii][jj]==0){
-//                                pointsCount++;
-//                                UnitOfBoardButton[ii][jj].setBackground(markedColor);
-//                                if (pointsCount == 25){
-//                                    displaySplashScreen(1000);
-//                                    msgDisplayTextArea.append("Perfect Game!\npoints: " +pointsCount+"\nTime: "+seconds);
-//                                }
-//                            }else{
-//                                pointsCount--;
-//                                UnitOfBoardButton[ii][jj].setBackground(errorColor);
-//                            }
-//                        }else {
-//                            if (solution[ii][jj] == 1) {
-//                                pointsCount++;
-//                                UnitOfBoardButton[ii][jj].setBackground(correctColor);
-//                                if (pointsCount == 25){
-//                                    displaySplashScreen(1000);
-//                                    msgDisplayTextArea.append("Perfect Game!\npoints: " +pointsCount+"\nTime: "+seconds);
-//                                }
-//                            } else {
-//                                pointsCount--;
-//                                UnitOfBoardButton[ii][jj].setBackground(errorColor);
-//                            }
-//                        }
-//                        pointsTextField.setText(String.valueOf(pointsCount));
-//                    }
-//                });
-//================================================================================================================================
+        for (int i = 0; i < unitOfBoardButton.length; i++) {
+            for (int j = 0; j < unitOfBoardButton[i].length; j++) {
+                unitOfBoardButton[i][j] = new JButton();
+                unitOfBoardButton[i][j].setPreferredSize(new Dimension(100, 100));
+                unitOfBoardButton[i][j].setBackground(Color.lightGray);
                 //add all the buttons to the main panel
-                boardMainPanel.add(UnitOfBoardButton[i][j]);
+                boardMainPanel.add(unitOfBoardButton[i][j]);
             }
         }
+        //Two border combine together makes nice looking
         Border b1 = BorderFactory.createEmptyBorder(5, 5, 0, 0);
         Border b2 = BorderFactory.createMatteBorder(2, 5, 5, 2, Color.GRAY);
         boardMainPanel.setBorder(new CompoundBorder(b1, b2));
@@ -261,9 +225,7 @@ public class GameView extends JFrame {
      * @version 1.0
      * @since 2021-09-24
      */
-    int seconds = 0;
-    Timer timer = new Timer();
-    TimerTask timerTask;
+
     public JPanel initControlPanel() {
         // init all panel in the control panel
         controlMainPanel = new JPanel(new BorderLayout());
@@ -288,12 +250,8 @@ public class GameView extends JFrame {
 
         //logo panel member and behavior
         try {
-
-
             //Image Path may different in different IDEs
-
             logoLabel = new JLabel(new ImageIcon(RESOURCE_PATH + LOGO_PATH));
-
         } catch (Exception e) {
             System.err.println(FILE_NOT_FOUND);
 
@@ -303,31 +261,33 @@ public class GameView extends JFrame {
         //Points panel member and behavior
 
         pointsTextField = new JTextField("0", 5);
-        pointsDisplayPanel.add(pointsLabel);
-        pointsDisplayPanel.add(pointsTextField);
+
         pointsDisplayPanel.setBorder(new EmptyBorder(10, 0, 0, 0));
 
         //messageDisplayPanel member and behavior
-        msgDisplayTextArea.setBackground(new Color(255, 255, 255));
-
+        msgDisplayTextArea.setBackground(Color.WHITE);
         msgDisplayScrollPane.setViewportView(msgDisplayTextArea);
-
         msgDisplayScrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_AS_NEEDED);
+        msgDisplayScrollPane.setBorder(new CompoundBorder(new EmptyBorder(0,5,0,5), LineBorder.createBlackLineBorder())) ;
 
 
         //timePanel member and behavior
         //initiate the timer
         timeTextField = new JTextField("0s", 5);
 
-        timePanel.add(timeLabel);
-        timePanel.add(timeTextField);
+
         //set reset button property
 
         resetButton.setBackground(Color.ORANGE);
+
+        // add up
+        timePanel.add(timeLabel);
+        timePanel.add(timeTextField);
         resetButton.add(new JLabel(RESET));
         resetPanel.add(resetButton);
-
-//layouts
+        pointsDisplayPanel.add(pointsLabel);
+        pointsDisplayPanel.add(pointsTextField);
+        //layouts
         northPanel.add(logoPanel, BorderLayout.NORTH);
         northPanel.add(pointsDisplayPanel, CENTER);
         southPanel.add(timePanel, BorderLayout.NORTH);
@@ -339,9 +299,11 @@ public class GameView extends JFrame {
 
 
         controlMainPanel.setBorder(new EmptyBorder(25, 0, 0, 0));
+
         return controlMainPanel;
     }
 
+    /*member of addLeftAndMarkPanel*/
     JPanel combinedMarkLeftPanel;
 
     /**
@@ -359,12 +321,11 @@ public class GameView extends JFrame {
         return combinedMarkLeftPanel;
     }
 
+    /*member of combinedTopBoardPanel*/
     JPanel combinedTopBoardPanel;
-    //combine the top panel and the board panel
-
     /**
      * Add Top and Board Panel to the same JPanel and return it
-     *
+     * combine the top panel and the board panel
      * @author Jiayu Lin, Chang Luo
      * @version 1.0
      * @since 2021-09-24
@@ -378,17 +339,14 @@ public class GameView extends JFrame {
     }
 
 
-    final String SPLASH_IMAGE_PATH = "piccrossLogo.jpg";
 
-    final String AUTHOR_SIGNATURE = "Lin,Jiayu/Luo,Chang's Piccross Game Staring....";
-    final String INTERRUPTED_EXCEPTION = "InterruptedException!!";
     JWindow splashScreenWindow = new JWindow();
 
     JPanel windowPanel = new JPanel(new BorderLayout());
     ImageIcon windowImage = new ImageIcon(RESOURCE_PATH + SPLASH_IMAGE_PATH);
     JLabel authorSignatureLabel = new JLabel(AUTHOR_SIGNATURE, JLabel.CENTER);
 
-    public void displaySplashScreen(int time) {
+    public void displaySplashScreen() {
 
 
         try {
@@ -407,7 +365,7 @@ public class GameView extends JFrame {
         authorSignatureLabel.setOpaque(true);
 
 
-        //set Attributes width/height for Splash
+        //Centralize Splash
         int width = windowImage.getIconWidth();
         int height = windowImage.getIconHeight();
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -423,7 +381,7 @@ public class GameView extends JFrame {
         splashScreenWindow.setVisible(true);
         try {
             //Stay at SplashScreen time
-            Thread.sleep(time);
+            Thread.sleep(1000);
             //Dispose the SplashScreenWindow
             splashScreenWindow.dispose();
         } catch (InterruptedException e) {
@@ -546,12 +504,12 @@ public class GameView extends JFrame {
     JColorChooser markedColorChooser = new JColorChooser();
 
     void initMarkedColorChooser(){
-        markedColor = JColorChooser.showDialog(colorFrame,"Marked color Chooser",markedColor);
+        markedColor = JColorChooser.showDialog(colorFrame,"Marked Color Chooser",markedColor);
         markedColorPanel.setBackground(markedColor);
     }
     JColorChooser errorColorChooser = new JColorChooser();
     void initErrorColorChooser(){
-        errorColor = JColorChooser.showDialog(colorFrame,"Error color Chooser",errorColor);
+        errorColor = JColorChooser.showDialog(colorFrame,"Error Color Chooser",errorColor);
         errorColorPanel.setBackground(errorColor);
     }
     JColorChooser correctColorChooser = new JColorChooser();
@@ -559,7 +517,7 @@ public class GameView extends JFrame {
         correctColor = JColorChooser.showDialog(colorFrame,"Correct Color Chooser",correctColor);
         correctColorPanel.setBackground(correctColor);
     }
-    public void updatetopView(){
+    public void updateLabelView(){
 
         for (int i = 0; i < columnLabelString.length; i++) {
             labelsOfTopPanel[i].setText("(" + columnLabelString[i] + ")");
@@ -573,7 +531,7 @@ public class GameView extends JFrame {
 
 
 
-    //Con      Constructor flag Using CTRL + f to locate it
+    //     Constructor flag Using CTRL + f to locate it
 
     /**
      * Initiate the game GUI
@@ -584,9 +542,10 @@ public class GameView extends JFrame {
      */
     JFrame mainFrame;
     JPanel gamePanel;
+    ImageIcon mainFrameImageIcon;
     public GameView() {
 
-        displaySplashScreen(1000);
+        displaySplashScreen();
 
 
         mainFrame = new JFrame();
@@ -610,6 +569,10 @@ public class GameView extends JFrame {
         mainFrame.setTitle(TITLE);
         mainFrame.setBackground(Color.BLACK);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //set main Frame image icon
+        mainFrameImageIcon = new ImageIcon(RESOURCE_PATH + MAIN_FRAME_ICON);
+        mainFrame.setIconImage(mainFrameImageIcon.getImage());
 
         //Making the Game window centralized
         int width = mainFrame.getWidth();
