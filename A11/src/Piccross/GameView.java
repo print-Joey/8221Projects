@@ -7,6 +7,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.ImageObserver;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -568,7 +570,12 @@ private final String MAIN_FRAME_ICON = "icon.jpg";
         mainFrame.setResizable(false);
         mainFrame.setTitle(TITLE);
         mainFrame.setBackground(Color.BLACK);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                mainFrame.setVisible(false);
+            }
+        });
 
         //set main Frame image icon
         mainFrameImageIcon = new ImageIcon(RESOURCE_PATH + MAIN_FRAME_ICON);

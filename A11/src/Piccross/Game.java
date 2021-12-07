@@ -10,9 +10,9 @@ public class Game {
             GameModel gameModel = new GameModel();
             GameView gameView = new GameView();
             GameController gameController = new GameController(gameModel, gameView);
-        } else if ("S".equals(args[1])) {
+        } else if ("S".equals(args[0])) {
             GameServer gameServer = new GameServer();
-        } else if ("C".equals(args[2])) {
+        } else if ("C".equals(args[0])) {
             GameClient gameClient = new GameClient();
 
         }

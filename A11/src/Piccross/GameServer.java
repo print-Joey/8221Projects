@@ -5,6 +5,12 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
 
 public class GameServer {
 
@@ -18,7 +24,7 @@ public class GameServer {
 
     public GameServer() {
         initServerFrame();
-
+        addListener();
     }
 
     //Lv.1 Components
@@ -37,6 +43,7 @@ public class GameServer {
     JLabel portLabel;
 
     JButton executeButton;
+    JButton resultButton;
     JCheckBox finalizeCheckBox;
     JButton endButton;
 
@@ -53,6 +60,7 @@ public class GameServer {
         portTextField = new JTextField();
 
         executeButton = new JButton();
+        resultButton = new JButton();
         finalizeCheckBox = new JCheckBox();
         endButton = new JButton();
 
@@ -74,12 +82,14 @@ public class GameServer {
 
         portLabel.setText("Port:");
         portTextField.setColumns(NUM_OF_COLUMN_OF_TEXT_FIELD);
+        portTextField.setText("1000");
 
         //set button color
         executeButton.setBackground(Color.ORANGE);
         endButton.setBackground(Color.ORANGE);
         //Set text
-        executeButton.add(new JLabel("Connect"));
+        executeButton.add(new JLabel("Execute"));
+        resultButton.add(new JLabel("Results"));
         finalizeCheckBox.setText("Finalize");
         endButton.add(new JLabel("End"));
 
@@ -131,4 +141,155 @@ public class GameServer {
         serverFrame.setBounds(x, y, width, height);
         
     }
+    ServerSocket serverSocket = null;
+    Socket socket = null;
+    ArrayList<String> clientsData;
+    int numOfClient;
+    public void addListener(){
+        executeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int portNum = Integer.parseInt(portTextField.getText());
+                    serverTextArea.append("Execute Button Pressed\n");
+                    try {
+                        serverSocket = new ServerSocket(portNum);
+
+                        //socket = new Socket(serverSocket.getInetAddress(),portNum);
+                        serverTextArea.append("Port Number: " + portNum + "\n");
+
+
+                        serverDataManagement();
+
+
+                        //Disable ExecuteButton
+                        executeButton.setEnabled(false);
+                        executeButton.setBackground(Color.GRAY);
+                    } catch (Exception serverSocketException) {
+                        serverTextArea.append("serverSocketException\n");
+                    }
+                } catch (Exception portNumberException) {
+                    serverTextArea.append("Invalid port number\n");
+
+
+                }
+
+            }
+        });
+
+        endButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    serverSocket.close();
+                    serverTextArea.append("Server end connection... Disconnected\n");
+
+                    //Reset Exec button
+                    executeButton.setEnabled(true);
+                    executeButton.setBackground(Color.ORANGE);
+                } catch (Exception Exception) {
+                    serverTextArea.append("Fail to end connection\n");
+                }
+            }
+        });
+/*===============================================================
+        resultButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+***
+*/
+    }
+    Thread serverMsgThread;
+    public void serverDataManagement(){
+        try{
+            serverMsgThread = new Thread(new ServerMsgTask());
+            serverMsgThread.start();
+
+        }catch(Exception e){
+
+        }
+
+    }
+
+    class ServerMsgTask implements Runnable{
+
+        public final String SEPARATOR = "#";
+        public final String PROTOCOL = "P";
+        int secondSeparatorIndex = 0;
+        int protocolIndex = 0;
+        String clientID = "";
+        String clientGameConfig = "";
+        String fromClientFormattedData;
+        PrintStream toClientSteam = null;
+        BufferedReader fromClientStream = null;
+        String toClientFormattedData = null;
+
+
+        @Override
+        public void run() {
+            //initialize all variables
+
+            numOfClient = 0;
+
+            waitClient();
+
+
+            for(;;) {
+
+
+                try {
+
+                    inputDataFromClient();
+
+
+
+                    if (fromClientFormattedData.contains("P1")) {
+                        clientID = fromClientFormattedData.substring(0,1);
+                        clientGameConfig = fromClientFormattedData.substring(5,fromClientFormattedData.length());
+                        System.out.println(("Client No. " + clientID + " Game Config: " + clientGameConfig));
+                    }else if(fromClientFormattedData.contains("P2")){
+                        toClientFormattedData = fromClientFormattedData +SEPARATOR+ clientGameConfig;
+                        toClientSteam.write(toClientFormattedData.getBytes());
+                    }
+                    if(fromClientFormattedData == null){
+                        break;
+                    }
+
+                } catch (Exception Excep) {
+                    Excep.printStackTrace();
+                }
+            }
+
+        }
+
+
+
+       public void waitClient(){
+                try {
+                    serverTextArea.append("Waiting for clients to connect ...\n");
+                    socket = serverSocket.accept();
+                    ++numOfClient;
+                    System.out.println("Connecting " + socket.getInetAddress() + " in port " + socket.getLocalPort() + ".\n");
+                    System.out.println(socket.isConnected());
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+            public void inputDataFromClient() throws IOException {
+                toClientSteam = new PrintStream(socket.getOutputStream());
+                 fromClientStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                toClientSteam.println(numOfClient);
+                fromClientFormattedData = fromClientStream.readLine();
+        }
+
+
+    }
+    //For easy to run, delete before submission
+    public static void main(String[] args) {
+GameServer gs = new GameServer();
+    }
+    //=============================================
 }

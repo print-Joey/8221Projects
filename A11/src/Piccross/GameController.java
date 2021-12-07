@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -32,7 +33,7 @@ public class GameController implements ActionListener {
 
     int pointsCount = 0;
     int markCheckBoxCount = 0;
-    private boolean isNewGameClicked = false;
+    boolean isNewGameClicked = false;
 
     public GameController(GameModel gameModel,GameView  gameView) {
 
@@ -122,7 +123,8 @@ public class GameController implements ActionListener {
                     this.gameView.errorColorButton.addActionListener(this);
                 } else if (e.getSource() == this.gameView.exitMenuItem) {
 
-                    System.exit(0);
+                    this.gameView.mainFrame.setVisible(false);
+
 
                 } else if (e.getSource() == this.gameView.aboutMenuItem) {
                     try {
@@ -241,7 +243,7 @@ public class GameController implements ActionListener {
         }
 
 
-    private void resetGame() {
+     void resetGame() {
         this.gameView.msgDisplayTextArea.setText("");
         this.gameView.pointsTextField.setText("0");
         pointsCount = 0;

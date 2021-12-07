@@ -1,6 +1,8 @@
 package Piccross;
 
 
+
+
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -8,8 +10,13 @@ import javax.swing.border.LineBorder;
 
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.net.InetAddress;
+import java.net.Socket;
 
-public class GameClient {
+public class GameClient  {
 
     private final String RESOURCE_PATH = "A11\\src\\Piccross\\Resource\\";
     private final String CLIENT_PIC = "piccorssLogoClient.png";
@@ -17,10 +24,14 @@ public class GameClient {
     private final String CLIENT_LOGO = "icon.jpg";
     private final int NUM_OF_COLUMN_OF_TEXT_FIELD = 8;
     private final int THICKNESS_OF_BORDER = 5;
+
     public GameClient(){
     initClientFrame();
+    addListener();
 
     }
+
+
 //Lv.1 Components
     JFrame clientFrame;
 //Lv.2 Components
@@ -45,6 +56,7 @@ public class GameClient {
     JButton endButton;
     JButton newGameButton;
     JButton sendButton;
+    JButton receiveButton;
     JButton playButton;
 
     public void initClientFrame(){
@@ -69,6 +81,7 @@ public class GameClient {
         newGameButton = new JButton();
         sendButton = new JButton();
         playButton = new JButton();
+        receiveButton = new JButton();
 
         clientTextArea = new JTextArea();
 
@@ -92,20 +105,25 @@ public class GameClient {
 
         serverLabel.setText("Server:");
         serverTextField.setColumns(NUM_OF_COLUMN_OF_TEXT_FIELD);
+        //set default server localhost for convenience
+        serverTextField.setText("localhost");
 
         portLabel.setText("Port:");
         portTextField.setColumns(NUM_OF_COLUMN_OF_TEXT_FIELD);
+        portTextField.setText("1000");
         //set button color
         connectButton.setBackground(Color.ORANGE);
-        endButton.setBackground(Color.ORANGE);
+        endButton.setBackground(Color.GRAY);
         newGameButton.setBackground(Color.ORANGE);
         sendButton.setBackground(Color.ORANGE);
         playButton.setBackground(Color.ORANGE);
+        receiveButton.setBackground(Color.orange);
         //set text in buttons
         connectButton.add(new JLabel("Connect"));
         endButton.add(new JLabel("End"));
         newGameButton.add(new JLabel("New Game"));
         sendButton.add(new JLabel("Send"));
+        receiveButton.add(new JLabel("Receive game"));
         playButton.add(new JLabel("Play"));
 
         clientTextArea.setBackground(Color.WHITE);
@@ -116,6 +134,7 @@ public class GameClient {
         //set size of MsgPane
         msgPane.setPreferredSize(new Dimension(580,100));
 
+        endButton.setEnabled(false);
 
 
         //add up
@@ -131,6 +150,7 @@ public class GameClient {
         //add up
         buttonsPanel.add(newGameButton);
         buttonsPanel.add(sendButton);
+        buttonsPanel.add(receiveButton);
         buttonsPanel.add(playButton);
 
 
@@ -165,6 +185,192 @@ public class GameClient {
         int y = (screen.height - height) / 2;
         clientFrame.setBounds(x, y, width, height);
     }
+    Socket socket;
+    GameModel gameModel = new GameModel();
+    String newGameConfig = " ";
+
+    //==========
+    boolean isisDoBackgroundRuned = false; // isDoBackground method in sentAction runs
+    public void addListener(){
+
+        sendButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
 
-}
+                SentButtonAction sba = new SentButtonAction();
+                sba.execute();
+
+
+
+
+
+
+            }
+        });
+
+        connectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clientTextArea.append("Connection button\n");
+                try {
+                    int port = Integer.parseInt(portTextField.getText());
+
+                    InetAddress severIPAddress = null;
+
+                    try {
+                        severIPAddress = InetAddress.getByName(String.valueOf(serverTextField.getText()));
+                        socket = new Socket(severIPAddress,port);
+
+                        //initMsgThread();
+                        clientTextArea.append("Connection with "+ severIPAddress +" on port "+ port+" successfully\n");
+                        //Connection success,set it false.
+                        connectButton.setEnabled(false);
+                        connectButton.setBackground(Color.gray);
+
+                        //End button released
+                        endButton.setEnabled(true);
+                        endButton.setBackground(Color.ORANGE);
+                    } catch (Exception Exception) {
+                        JOptionPane.showMessageDialog(clientFrame,"connection refused:connect","Unable to connect",JOptionPane.ERROR_MESSAGE);
+                        clientTextArea.append("Connection with "+ severIPAddress +" on port "+ port+" Failed\n");
+                        clientTextArea.append("Connection refused:connect\n");
+                    }
+
+                }catch (Exception invalidPortNumberE){
+                    clientTextArea.append("Invalid port number\n");
+                }
+
+            }
+        });
+
+
+
+
+
+        receiveButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+                ReceiveGameConfig rgc = new ReceiveGameConfig();
+                rgc.execute();
+
+
+            }
+        });
+
+
+        endButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    socket.close();
+                    //reset connection Button
+
+                    connectButton.setEnabled(true);
+                    connectButton.setBackground(Color.ORANGE);
+                } catch (Exception Exception) {
+                    clientTextArea.append("Client end connection Disconnected\n");
+
+                }
+            }
+        });
+
+        newGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                newGameConfig = gameModel.solutionTokenizerForClient();
+                clientTextArea.append("Creating New MVC game \n");
+                clientTextArea.append("New Game:"+newGameConfig);
+
+            }
+        });
+        playButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GameView gameView = new GameView();
+                GameController gameController = new GameController(gameModel,gameView);
+                //ActionEvent ae = new ActionEvent(gameView.newGame,1,"null");
+                gameController.isNewGameClicked = true;
+                gameController.resetGame();
+
+
+            }
+        });
+
+    }
+
+    public final String SEPARATOR = "#";
+    public final String PROTOCOL = "P";
+
+    String toServerGameConfigFormattedData;
+    BufferedReader bufferFromServer;
+    PrintStream toServerStream;
+    String clientId;
+
+    class SentButtonAction extends SwingWorker<Void, String> {
+
+
+
+
+
+
+        @Override
+        public Void doInBackground () {
+            try{
+            isisDoBackgroundRuned =true;
+            bufferFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            toServerStream = new PrintStream(socket.getOutputStream());
+
+
+            clientId = bufferFromServer.readLine();
+
+
+            toServerGameConfigFormattedData = clientId + SEPARATOR + PROTOCOL + "1" + SEPARATOR + newGameConfig;
+            toServerStream.write(toServerGameConfigFormattedData.getBytes());
+                clientTextArea.append("You are Player No." + clientId + "\n");
+            }catch (Exception e3){
+
+            }
+
+            return null;
+        }
+
+
+    }
+    class ReceiveGameConfig extends SwingWorker <Void,String>{
+        String dataFromServer;
+
+        @Override
+        protected Void doInBackground()  {
+            try {
+                bufferFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                toServerStream = new PrintStream(socket.getOutputStream());
+
+                toServerGameConfigFormattedData = clientId + SEPARATOR + PROTOCOL + 2;
+                toServerStream.write(toServerGameConfigFormattedData.getBytes());
+
+                dataFromServer = bufferFromServer.readLine();
+                clientId = dataFromServer.substring(0,1);
+                newGameConfig = dataFromServer.substring(3);
+
+
+
+            }catch (Exception e5){}
+
+            clientTextArea.append("Game config received: "+ newGameConfig);
+            return null;
+        }
+
+        @Override
+        protected void done() {
+
+
+        }
+    }
+//For easy to run, delete before submission
+    public static void main(String[] args) {
+        GameClient gameClient = new GameClient();
+    }
+    }
+//========================================

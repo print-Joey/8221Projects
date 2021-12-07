@@ -104,6 +104,24 @@ public class GameModel {
         solutionString +="\n";
         return solutionString;
     }
+
+    public String solutionTokenizerForClient() {
+        String solutionString = "";
+
+        for (int i = 0; i < numberOfRow; i++) {
+            for (int j = 0; j < numberOfColumn; j++) {
+                solutionString += config[i][j];
+            }
+            // No comma at the end
+            if(i == numberOfRow -1){
+
+            }else {
+                solutionString += ",";
+            }
+        }
+        solutionString +="\n";
+        return solutionString;
+    }
     public void printResult() {
         for (int i = 0; i < numberOfRow; i++) {
             for (int j = 0; j < numberOfColumn; j++) {
