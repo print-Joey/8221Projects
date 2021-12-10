@@ -16,12 +16,21 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 
+/**
+ * GameClient
+ * @author Jiayu Lin
+ * @version 1.0
+ * @since Dec-09-2021
+ */
+
 public class GameClient  {
 
+// Constants
     private final String RESOURCE_PATH = "A11\\src\\Piccross\\Resource\\";
     private final String CLIENT_PIC = "piccorssLogoClient.png";
     private final String CLIENT_TITLE = "Piccross Client";
     private final String CLIENT_LOGO = "icon.jpg";
+    private final String  END_CONNECTION_SYMBOOL =  "0";
     private final int NUM_OF_COLUMN_OF_TEXT_FIELD = 8;
     private final int THICKNESS_OF_BORDER = 5;
 
@@ -59,6 +68,13 @@ public class GameClient  {
     JButton receiveButton;
     JButton playButton;
 
+    /**
+     * initClientFrame
+     * @author Jiayu Lin
+     * @version 1.0
+     * @since Dec-09-2021
+     *
+     */
     public void initClientFrame(){
       //initialize each objects
         clientFrame = new JFrame();
@@ -88,8 +104,9 @@ public class GameClient  {
         msgPane = new JScrollPane();
 
         //set objects' properties
-
+        // import images from specific path, Path may different between each IDEs.
         try{
+
             ImageIcon clientPic = new ImageIcon(RESOURCE_PATH+CLIENT_PIC);
             picLabel.setIcon(clientPic);
         }catch(Exception e){
@@ -97,6 +114,7 @@ public class GameClient  {
             System.err.println("e");
 
         }
+        //Set each components attributes
         picLabel.setHorizontalAlignment(SwingConstants.CENTER);
         picLabel.setBorder(new EmptyBorder(THICKNESS_OF_BORDER,THICKNESS_OF_BORDER,THICKNESS_OF_BORDER,THICKNESS_OF_BORDER));
 
@@ -153,7 +171,7 @@ public class GameClient  {
         buttonsPanel.add(receiveButton);
         buttonsPanel.add(playButton);
 
-
+//set layouts
         controlPanel.setLayout(new BorderLayout());
         controlPanel.add(textFieldsPanel,BorderLayout.NORTH);
         controlPanel.add(buttonsPanel,BorderLayout.CENTER);
@@ -166,6 +184,8 @@ public class GameClient  {
         clientFrame.pack();
         clientFrame.setVisible(true);
         clientFrame.setResizable(false);
+
+        // import images from specific path, Path may different between each IDEs.
         try{
             ImageIcon iconServerFrame = new ImageIcon(RESOURCE_PATH +CLIENT_LOGO);
             clientFrame.setIconImage(iconServerFrame.getImage());
@@ -183,8 +203,11 @@ public class GameClient  {
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (screen.width - width) / 2;
         int y = (screen.height - height) / 2;
+        //To stay with Sever at single screen, So reduce x's value.
         clientFrame.setBounds(x-600, y, width, height);
     }
+
+    //Instance variable used in addListener()
     Socket socket;
     GameModel gameModel = new GameModel();
     String newGameConfig = " ";
@@ -193,8 +216,14 @@ public class GameClient  {
 
 InputStream inputStreamFromServer;
 
-
-    boolean isSentButtonClickAtFirstTime = false; // isDoBackground method in sentAction runs
+    /**
+     * addListener
+     *
+     * Add listeners of gameClient components
+     * @author Jiayu Lin
+     * @version 1.0
+     * @since Dec-09-2021
+     */
     public void addListener(){
 
         sendButton.addActionListener(new ActionListener() {
@@ -206,7 +235,7 @@ InputStream inputStreamFromServer;
 
                 toServerGameConfigFormattedData = clientId + SEPARATOR + PROTOCOL + "1" + SEPARATOR + newGameConfig;
                 toServerStream.write(toServerGameConfigFormattedData.getBytes());
-                isSentButtonClickAtFirstTime = true;
+
             }catch(Exception ex){ }
             }
         });
@@ -309,7 +338,7 @@ InputStream inputStreamFromServer;
                     if(socket==(null)){
                         System.exit(0);
                     }
-                    final String  END_CONNECTION_SYMBOOL =  "0";
+
                     PrintStream printStream = new PrintStream(socket.getOutputStream());
                     printStream.println(clientId + PROTOCOL + END_CONNECTION_SYMBOOL);
                     socket.close();
