@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class GameServer {
 
@@ -130,7 +129,7 @@ public class GameServer {
         }
         serverFrame.setTitle(SERVER_TITLE);
 
-        serverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
         //Making Frame centralized
         int width = serverFrame.getWidth();
@@ -142,8 +141,8 @@ public class GameServer {
         
     }
     ServerSocket serverSocket = null;
-    Socket socket = null;
-    ArrayList<String> clientsData;
+    Socket socket;
+
     int numOfClient;
     public void addListener(){
         executeButton.addActionListener(new ActionListener() {
@@ -181,17 +180,19 @@ public class GameServer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    serverSocket.close();
-                    serverTextArea.append("Server end connection... Disconnected\n");
+                    System.exit(0);
 
-                    //Reset Exec button
-                    executeButton.setEnabled(true);
-                    executeButton.setBackground(Color.ORANGE);
                 } catch (Exception Exception) {
                     serverTextArea.append("Fail to end connection\n");
                 }
             }
         });
+
+
+
+
+
+
 /*===============================================================
         resultButton.addActionListener(new ActionListener() {
             @Override
@@ -213,35 +214,130 @@ public class GameServer {
         }
 
     }
-
+    public final String SEPARATOR = "#";
+    public final String PROTOCOL = "P";
+    int secondSeparatorIndex = 0;
+    int protocolIndex = 0;
+    String clientID = "";
+    String clientGameConfig = "";
+    String fromClientFormattedData;
+    //PrintStream toClientSteam = null;
+    //PrintStream fromClientStream = null;
+    String toClientFormattedData = null;
     class ServerMsgTask implements Runnable{
 
-        public final String SEPARATOR = "#";
-        public final String PROTOCOL = "P";
-        int secondSeparatorIndex = 0;
-        int protocolIndex = 0;
-        String clientID = "";
-        String clientGameConfig = "";
-        String fromClientFormattedData;
-        PrintStream toClientSteam = null;
-        BufferedReader fromClientStream = null;
-        String toClientFormattedData = null;
+
 
 
         @Override
         public void run() {
             //initialize all variables
-
             numOfClient = 0;
-
-            waitClient();
-
-
             for(;;) {
+                waitClient();
+                Worked w = new Worked(socket,numOfClient);
+                w.start();
+            }
 
 
+        }
+
+
+
+       public void waitClient(){
                 try {
+                    serverTextArea.append("Waiting for clients to connect ...\n");
+                    socket = serverSocket.accept();
 
+                    if(socket.isConnected()){
+                        ++numOfClient;
+
+                        serverTextArea.append(("Connected " + socket.getInetAddress() + " in port " + socket.getLocalPort() + ".\n"));
+                        serverTextArea.append(("Numbers of Client: " + numOfClient+".\n"));
+                    }
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+            public void inputDataFromClient() throws IOException {
+               // toClientSteam = new PrintStream(socket.getOutputStream());
+              //   fromClientStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+               // toClientSteam.println(numOfClient);
+              //  fromClientFormattedData = fromClientStream.readLine();
+        }
+
+
+    }
+    String clientidString;
+    int clientId;
+    class Worked extends Thread{
+        Socket socket;
+
+        public Worked(Socket s, int nclient) {
+            socket = s;
+            clientidString = String.valueOf(nclient);
+            clientId = nclient;
+        }
+        @Override
+        public void run() {
+            try {
+                PrintStream toClientSteam = new PrintStream(socket.getOutputStream());
+                BufferedReader fromClientStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                System.out.println(clientId);
+                toClientSteam.println(clientId);
+
+                fromClientFormattedData = fromClientStream.readLine();
+
+
+                String clientInfo[];
+                    while(!fromClientFormattedData.contains("P0")) {
+
+                    if (fromClientFormattedData.contains("P1")) {
+//                        clientidString = fromClientFormattedData.substring(0, 1);
+//                        clientGameConfig = fromClientFormattedData.substring(5);
+
+                        clientInfo = fromClientFormattedData.split("#");
+                        clientidString = clientInfo[0];
+                        clientGameConfig = clientInfo[2];
+                        serverTextArea.append(("Client No. " + clientidString + " Game Config: " + clientGameConfig+"\n"));
+                    } else if (fromClientFormattedData.contains("P2")) {
+                        toClientFormattedData = clientidString + SEPARATOR + clientGameConfig;
+                        toClientSteam.println(toClientFormattedData);
+                    }
+                        fromClientFormattedData = "";
+
+                    fromClientFormattedData = fromClientStream.readLine();
+                    }
+
+                    numOfClient--;
+                    serverTextArea.append("Disconnecting " + clientidString +" at "+socket.getInetAddress() + "!");
+                if (numOfClient == 0 && finalizeCheckBox.isSelected()) {
+                    System.out.println("Ending server...");
+
+                    System.exit(0);
+                }
+                    socket.close();
+
+
+
+            }catch (Exception e5){
+
+            }
+
+
+        }
+    }
+    //For easy to run, delete before submission
+    public static void main(String[] args) {
+GameServer gs = new GameServer();
+    }
+    //=============================================
+}
+//======================================
+/*                try {
+                    if(fromClientFormattedData == null){
+                        break;
+                    }
                     inputDataFromClient();
 
 
@@ -254,42 +350,9 @@ public class GameServer {
                         toClientFormattedData = fromClientFormattedData +SEPARATOR+ clientGameConfig;
                         toClientSteam.write(toClientFormattedData.getBytes());
                     }
-                    if(fromClientFormattedData == null){
-                        break;
-                    }
+
 
                 } catch (Exception Excep) {
                     Excep.printStackTrace();
-                }
-            }
-
-        }
-
-
-
-       public void waitClient(){
-                try {
-                    serverTextArea.append("Waiting for clients to connect ...\n");
-                    socket = serverSocket.accept();
-                    ++numOfClient;
-                    System.out.println("Connecting " + socket.getInetAddress() + " in port " + socket.getLocalPort() + ".\n");
-                    System.out.println(socket.isConnected());
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
-            public void inputDataFromClient() throws IOException {
-                toClientSteam = new PrintStream(socket.getOutputStream());
-                 fromClientStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                toClientSteam.println(numOfClient);
-                fromClientFormattedData = fromClientStream.readLine();
-        }
-
-
-    }
-    //For easy to run, delete before submission
-    public static void main(String[] args) {
-GameServer gs = new GameServer();
-    }
-    //=============================================
-}
+                }*/
+//===============================================
