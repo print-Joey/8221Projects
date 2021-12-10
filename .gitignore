@@ -2,4 +2,15 @@
 
 /out
 
+#ignore .class file
 
+*.class
+
+#ignore other modules
+
+/Demo_CS
+
+#ignore other files
+
+*.xml
+*.iml
