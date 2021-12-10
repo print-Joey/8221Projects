@@ -120,6 +120,7 @@ public class GameClient  {
 
         userLabel.setText("User:");
         userTextField.setColumns(NUM_OF_COLUMN_OF_TEXT_FIELD);
+        userTextField.setText("Your name");
 
         serverLabel.setText("Server:");
         serverTextField.setColumns(NUM_OF_COLUMN_OF_TEXT_FIELD);
