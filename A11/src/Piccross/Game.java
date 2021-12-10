@@ -4,8 +4,11 @@ import java.awt.*;
 public class Game {
     public static void main(String[] args) {
 
-        // SplashScreen splashScreenObj = new SplashScreen(1000);
 
+        if(args == null|| args.length == 0){
+            System.err.println("Error !!!Please Provide argument to execute ");
+            System.err.println("eg. java Piccross.Game C");
+        }else
         if ("MVC".equals(args[0])) {
             GameModel gameModel = new GameModel();
             GameView gameView = new GameView();
