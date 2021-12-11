@@ -92,8 +92,9 @@ public class GameServer {
         finalizeCheckBox.setText("Finalize");
         endButton.add(new JLabel("End"));
 
-
+        //Set serverTextArea color
         serverTextArea.setBackground(Color.WHITE);
+        //set msgPane
         msgPane.setViewportView(serverTextArea);
         msgPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         msgPane.setBorder(new CompoundBorder(new EmptyBorder(THICKNESS_OF_BORDER, THICKNESS_OF_BORDER, THICKNESS_OF_BORDER, THICKNESS_OF_BORDER), LineBorder.createBlackLineBorder()));
@@ -112,7 +113,7 @@ public class GameServer {
         textFieldsPanel.add(endButton);
 
 
-
+        //add all the components to the serverFrame
         serverFrame.add(serverPicLabel, BorderLayout.NORTH);
         serverFrame.add(textFieldsPanel, BorderLayout.CENTER);
         serverFrame.add(msgPane, BorderLayout.SOUTH);
@@ -144,6 +145,7 @@ public class GameServer {
     Socket socket;
 
     int numOfClient;
+    //set the actionLisener for each button
     public void addListener(){
         executeButton.addActionListener(new ActionListener() {
             @Override
