@@ -6,8 +6,10 @@ public class Game {
 
 
         if(args == null|| args.length == 0){
-            System.err.println("Error !!!Please Provide argument to execute ");
-            System.err.println("eg. java Piccross.Game C");
+            System.err.println("Error!!!  Please Provide argument to execute!!!");
+            System.err.println("============================================");
+            System.err.println("Usage ==> java Piccross.Game <C/S>");
+
         }else
         if ("MVC".equals(args[0])) {
             GameModel gameModel = new GameModel();

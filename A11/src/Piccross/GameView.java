@@ -44,7 +44,7 @@ public class GameView extends JFrame {
 
 
     private final String RESOURCE_PATH = "A11\\src\\Piccross\\Resource\\";
-private final String MAIN_FRAME_ICON = "icon.jpg";
+    private final String MAIN_FRAME_ICON = "icon.jpg";
     //================================================================
 
 
@@ -216,7 +216,16 @@ private final String MAIN_FRAME_ICON = "icon.jpg";
     JPanel timePanel;
     JLabel timeLabel;
     JTextField timeTextField;
-    JButton resetButton;
+
+    public JButton getResetButton() {
+        return resetButton;
+    }
+
+    public void setResetButton(JButton resetButton) {
+        this.resetButton = resetButton;
+    }
+
+    private JButton resetButton;
     JPanel resetPanel;
     //set the panel which is used to control the game
 
@@ -574,6 +583,7 @@ private final String MAIN_FRAME_ICON = "icon.jpg";
             @Override
             public void windowClosed(WindowEvent e) {
                 mainFrame.setVisible(false);
+                System.exit(0);
             }
         });
 

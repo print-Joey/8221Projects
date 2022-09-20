@@ -1,11 +1,9 @@
-cd C:\21F_JAP_IDE_Path\A11\src\Piccross
+cd C:\Code\JavaProjects\8221Projects\A11\src\Piccross
 
 
 javac *.java
-cd C:\21F_JAP_IDE_Path\A11\src
+cd C:\Code\JavaProjects\8221Projects\A11\src\Piccross
 
 java Piccross.Game C
-
-
 
 pause

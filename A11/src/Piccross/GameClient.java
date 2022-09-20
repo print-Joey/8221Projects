@@ -3,6 +3,8 @@ package Piccross;
 
 
 
+import Piccross.Resource.ResourceConfigurations;
+
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -16,6 +18,8 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 /**
  * GameClient
  * @author Jiayu Lin
@@ -23,27 +27,20 @@ import java.net.Socket;
  * @since Dec-09-2021
  */
 
-public class GameClient  {
+public class GameClient {
 
-// Constants
-    private final String RESOURCE_PATH = "A11\\src\\Piccross\\Resource\\";
-    private final String CLIENT_PIC = "piccorssLogoClient.png";
-    private final String CLIENT_TITLE = "Piccross Client";
-    private final String CLIENT_LOGO = "icon.jpg";
-    private final String  END_CONNECTION_SYMBOOL =  "0";
-    private final int NUM_OF_COLUMN_OF_TEXT_FIELD = 8;
-    private final int THICKNESS_OF_BORDER = 5;
 
-    public GameClient(){
-    initClientFrame();
-    addListener();
+
+    public GameClient() {
+        initClientFrame();
+        addListener();
 
     }
 
 
-//Lv.1 Components
+    //Lv.1 Components
     JFrame clientFrame;
-//Lv.2 Components
+    //Lv.2 Components
     JScrollPane msgPane;
     JPanel textFieldsPanel;
     JPanel buttonsPanel;
@@ -70,13 +67,12 @@ public class GameClient  {
 
     /**
      * initClientFrame
-     * @author Jiayu Lin
-     * @version 1.0
-     * @since Dec-09-2021
      *
+     * @author Jiayu Lin
+     * @since Dec-09-2021
      */
-    public void initClientFrame(){
-      //initialize each objects
+    public void initClientFrame() {
+        //initialize each objects
         clientFrame = new JFrame();
 
         textFieldsPanel = new JPanel();
@@ -104,31 +100,31 @@ public class GameClient  {
         msgPane = new JScrollPane();
 
         //set objects' properties
-        // import images from specific path, Path may different between each IDEs.
-        try{
+        // import images from specific path, Path may vary between different IDE.
+        try {
 
-            ImageIcon clientPic = new ImageIcon(RESOURCE_PATH+CLIENT_PIC);
+            ImageIcon clientPic = new ImageIcon(ResourceConfigurations.RESOURCE_PATH + ResourceConfigurations.CLIENT_PIC);
             picLabel.setIcon(clientPic);
-        }catch(Exception e){
+        } catch (Exception e) {
 
             System.err.println("e");
 
         }
-        //Set each components attributes
+        //Set each component's attributes
         picLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        picLabel.setBorder(new EmptyBorder(THICKNESS_OF_BORDER,THICKNESS_OF_BORDER,THICKNESS_OF_BORDER,THICKNESS_OF_BORDER));
+        picLabel.setBorder(new EmptyBorder(ResourceConfigurations.THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER));
 
         userLabel.setText("User:");
-        userTextField.setColumns(NUM_OF_COLUMN_OF_TEXT_FIELD);
+        userTextField.setColumns(ResourceConfigurations.NUM_OF_COLUMN_OF_TEXT_FIELD);
         userTextField.setText("Your name");
 
         serverLabel.setText("Server:");
-        serverTextField.setColumns(NUM_OF_COLUMN_OF_TEXT_FIELD);
+        serverTextField.setColumns(ResourceConfigurations.NUM_OF_COLUMN_OF_TEXT_FIELD);
         //set default server localhost for convenience
         serverTextField.setText("localhost");
 
         portLabel.setText("Port:");
-        portTextField.setColumns(NUM_OF_COLUMN_OF_TEXT_FIELD);
+        portTextField.setColumns(ResourceConfigurations.NUM_OF_COLUMN_OF_TEXT_FIELD);
         portTextField.setText("1000");
         //set button color
         connectButton.setBackground(Color.ORANGE);
@@ -148,10 +144,10 @@ public class GameClient  {
         clientTextArea.setBackground(Color.WHITE);
         msgPane.setViewportView(clientTextArea);
         msgPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        msgPane.setBorder(new CompoundBorder(new EmptyBorder(THICKNESS_OF_BORDER,THICKNESS_OF_BORDER,THICKNESS_OF_BORDER,THICKNESS_OF_BORDER), LineBorder.createBlackLineBorder()) );
+        msgPane.setBorder(new CompoundBorder(new EmptyBorder(ResourceConfigurations.THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER), LineBorder.createBlackLineBorder()));
 
         //set size of MsgPane
-        msgPane.setPreferredSize(new Dimension(580,100));
+        msgPane.setPreferredSize(new Dimension(580, 100));
 
         endButton.setEnabled(false);
 
@@ -174,29 +170,29 @@ public class GameClient  {
 
 //set layouts
         controlPanel.setLayout(new BorderLayout());
-        controlPanel.add(textFieldsPanel,BorderLayout.NORTH);
-        controlPanel.add(buttonsPanel,BorderLayout.CENTER);
+        controlPanel.add(textFieldsPanel, BorderLayout.NORTH);
+        controlPanel.add(buttonsPanel, BorderLayout.CENTER);
 
-        clientFrame.add(picLabel,BorderLayout.NORTH);
-        clientFrame.add(controlPanel,BorderLayout.CENTER);
-        clientFrame.add(msgPane,BorderLayout.SOUTH);
+        clientFrame.add(picLabel, BorderLayout.NORTH);
+        clientFrame.add(controlPanel, BorderLayout.CENTER);
+        clientFrame.add(msgPane, BorderLayout.SOUTH);
 
+
+
+        // import images from specific path, Path may vary between different IDE.
+        try {
+            ImageIcon iconServerFrame = new ImageIcon(ResourceConfigurations.RESOURCE_PATH +ResourceConfigurations. CLIENT_LOGO);
+            clientFrame.setIconImage(iconServerFrame.getImage());
+        } catch (Exception e) {
+            System.err.println("e");
+        }
+        clientFrame.setTitle(ResourceConfigurations.CLIENT_TITLE);
         //set frame properties
+        //Set new Close Operation by exit Client
+        clientFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         clientFrame.pack();
         clientFrame.setVisible(true);
         clientFrame.setResizable(false);
-
-        // import images from specific path, Path may different between each IDEs.
-        try{
-            ImageIcon iconServerFrame = new ImageIcon(RESOURCE_PATH +CLIENT_LOGO);
-            clientFrame.setIconImage(iconServerFrame.getImage());
-        }catch (Exception e){
-            System.err.println("e");
-        }
-        clientFrame.setTitle(CLIENT_TITLE);
-
-
-
 
         //Making Frame centralized
         int width = clientFrame.getWidth();
@@ -205,39 +201,43 @@ public class GameClient  {
         int x = (screen.width - width) / 2;
         int y = (screen.height - height) / 2;
         //To stay with Sever at single screen, So reduce x's value.
-        clientFrame.setBounds(x-600, y, width, height);
+        clientFrame.setBounds(x - 400, y, width, height);
+        gameModel = new GameModel();
+
     }
 
     //Instance variable used in addListener()
     Socket socket;
-    GameModel gameModel = new GameModel();
+    GameModel gameModel;
     String newGameConfig = " ";
 
     //==========
 
-InputStream inputStreamFromServer;
+    InputStream inputStreamFromServer;
 
     /**
      * addListener
-     *
+     * <p>
      * Add listeners of gameClient components
+     *
      * @author Jiayu Lin
-     * @version 1.0
      * @since Dec-09-2021
      */
-    public void addListener(){
+    public void addListener() {
 
         sendButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-            try {
-                 toServerStream =  socket.getOutputStream();
+                try {
+                    toServerStream = socket.getOutputStream();
 
-                toServerGameConfigFormattedData = clientId + SEPARATOR + PROTOCOL + "1" + SEPARATOR + newGameConfig;
-                toServerStream.write(toServerGameConfigFormattedData.getBytes());
+                    toServerGameConfigFormattedData = clientId + ResourceConfigurations.SEPARATOR + ResourceConfigurations.PROTOCOL + "1" + ResourceConfigurations.SEPARATOR + newGameConfig;
+                    toServerStream.write(toServerGameConfigFormattedData.getBytes());
 
-            }catch(Exception ex){ }
+                } catch (Exception ex) {
+                    System.err.println("Send Button Exception!!!");
+                }
             }
         });
 
@@ -252,10 +252,10 @@ InputStream inputStreamFromServer;
 
                     try {
                         severIPAddress = InetAddress.getByName(String.valueOf(serverTextField.getText()));
-                        socket = new Socket(severIPAddress,port);
+                        socket = new Socket(severIPAddress, port);
 
                         //initMsgThread();
-                        clientTextArea.append("Connection with "+ severIPAddress +" on port "+ port+" successfully\n");
+                        clientTextArea.append("Connection with " + severIPAddress + " on port " + port + " successfully\n");
                         //Connection success,set it false.
                         connectButton.setEnabled(false);
                         connectButton.setBackground(Color.gray);
@@ -270,25 +270,25 @@ InputStream inputStreamFromServer;
                                     bufferFromServer = new BufferedReader(new InputStreamReader(inputStreamFromServer));
 
                                     clientId = bufferFromServer.readLine();
-                                    clientTextArea.append("You are Client No."+clientId+"\n");
+                                    clientTextArea.append("You are Client No." + clientId + "\n");
                                 } catch (IOException ioException) {
                                     ioException.printStackTrace();
                                 }
 
                             }
-                            }
+                        }
                         );
                         receiveClientId.start();
                         //End button released
                         endButton.setEnabled(true);
                         endButton.setBackground(Color.ORANGE);
                     } catch (Exception Exception) {
-                        JOptionPane.showMessageDialog(clientFrame,"connection refused:connect","Unable to connect",JOptionPane.ERROR_MESSAGE);
-                        clientTextArea.append("Connection with "+ severIPAddress +" on port "+ port+" Failed\n");
+                        JOptionPane.showMessageDialog(clientFrame, "connection refused:connect", "Unable to connect", JOptionPane.ERROR_MESSAGE);
+                        clientTextArea.append("Connection with " + severIPAddress + " on port " + port + " Failed\n");
                         clientTextArea.append("Connection refused:connect\n");
                     }
 
-                }catch (Exception invalidPortNumberE){
+                } catch (Exception invalidPortNumberE) {
                     clientTextArea.append("Invalid port number\n");
                 }
 
@@ -296,52 +296,51 @@ InputStream inputStreamFromServer;
         });
 
 
-
-
-
         receiveButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Thread receiveConfig = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        String []infos ;
-                        PrintStream toServerPrintStream = new PrintStream(socket.getOutputStream());
-                        //toServerStream = socket.getOutputStream();
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Thread receiveConfig = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            String[] infos;
+                            PrintStream toServerPrintStream = new PrintStream(socket.getOutputStream());
+                            //toServerStream = socket.getOutputStream();
 
-                        toServerGameConfigFormattedData = new String(clientId + SEPARATOR + PROTOCOL + "2") ;
+                            toServerGameConfigFormattedData = new String(clientId + ResourceConfigurations.SEPARATOR + ResourceConfigurations.PROTOCOL + "2");
 
-                        toServerPrintStream.println(toServerGameConfigFormattedData);
-                        toServerPrintStream.flush();
-                        BufferedReader bufferFromServer1 = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                            toServerPrintStream.println(toServerGameConfigFormattedData);
+                            toServerPrintStream.flush();
+                            BufferedReader bufferFromServer1 = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-                         dataFromServer = bufferFromServer1.readLine();
-                        infos = dataFromServer.split("#");
-                        String clientIdConfig = infos[0];
-                        newGameConfig = infos[1];
-                        clientTextArea.append("Received Game Config "+ newGameConfig + " From client No. "+ clientIdConfig+"\n");
-                    } catch (Exception e5) {
+                            dataFromServer = bufferFromServer1.readLine();
+                            infos = dataFromServer.split("#");
+                            String clientIdConfig = infos[0];
+                            newGameConfig = infos[1];
+                            clientTextArea.append("Received Game Config " + newGameConfig + " From client No. " + clientIdConfig + "\n");
+                        } catch (Exception exception) {
+                            System.err.println("Receive Button Exception!!!");
+                        }
+
+
                     }
 
 
-                }
+                });
+                receiveConfig.start();
 
-
-            });
-            receiveConfig.start();
-
-        }});
+            }
+        });
         endButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(socket==(null)){
+                    if (socket == (null)) {
                         System.exit(0);
                     }
 
                     PrintStream printStream = new PrintStream(socket.getOutputStream());
-                    printStream.println(clientId + PROTOCOL + END_CONNECTION_SYMBOOL);
+                    printStream.println(clientId + ResourceConfigurations.PROTOCOL + ResourceConfigurations.END_CONNECTION_SYMBOOL);
                     socket.close();
                     //reset connection Button
                     System.exit(0);
@@ -360,7 +359,7 @@ InputStream inputStreamFromServer;
                 gameModel.initGame();
                 newGameConfig = gameModel.solutionTokenizerForClient();
                 clientTextArea.append("Creating New MVC game \n");
-                clientTextArea.append("New Game:"+newGameConfig);
+                clientTextArea.append("New Game:" + newGameConfig);
 
             }
         });
@@ -368,30 +367,21 @@ InputStream inputStreamFromServer;
             @Override
             public void actionPerformed(ActionEvent e) {
                 GameView gameView = new GameView();
-                GameController gameController = new GameController(gameModel,gameView);
+                GameController gameController = new GameController(gameModel, gameView);
                 //ActionEvent ae = new ActionEvent(gameView.newGame,1,"null");
                 gameController.isNewGameClicked = true;
                 gameController.resetGame();
-
-
             }
         });
 
     }
 
-    public final String SEPARATOR = "#";
-    public final String PROTOCOL = "P";
+
 
     String toServerGameConfigFormattedData;
-    BufferedReader bufferFromServer ;
+    BufferedReader bufferFromServer;
     OutputStream toServerStream;
     String clientId;
 
-String dataFromServer;
-
-//For easy to run, delete before submission
-    public static void main(String[] args) {
-        GameClient gameClient = new GameClient();
-    }
-    }
-//========================================
+    String dataFromServer;
+}

@@ -1,5 +1,7 @@
 package Piccross;
 
+import Piccross.Resource.ResourceConfigurations;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,19 +17,6 @@ public class GameController implements ActionListener {
     private GameModel gameModel;
     private GameView gameView;
 
-    final String RESET_BUTTON_REACTION = "Reset Button pressed!!\n";
-    final String UNCHECK_MARK_CHECKBOX_REACTION = "Check Box \"Mark\" UnChecked!!\n";
-    final String CHECK_MARK_CHECKBOX_REACTION = "Check Box \"Mark\" Checked!!\n";
-    final String BLANK_SPACE = "           ";
-    final String BLANK_SPACE_CHK_BOX = "        ";
-    final String BLANK_SPACE_UNCHK_BOX = "      ";
-    private final String RESOURCE_PATH = "A11\\src\\Piccross\\Resource\\";
-    private final String DIALOG_IMAGE = "piccross.png";
-    private final String ABOUT_AUTHOR_SIGNATURE = "Lin,Jiayu/Luo,Chang's Piccross Game ";
-    private final String PERFECT_GAME_DIALOG = "gamepicwinner.png";
-    private final String SORRY_GAME_DIALOG =    "gamepicend.png";
-    private final String PERFECT_GAME_MSG = "Congrat!! You got perfect score";
-    private final String SORRY_GAME_MSG = "Unfortunately,You didn't get perfect score";
     private boolean [][]isButtonClicked;
     private boolean isAllButtonClicked;
 
@@ -51,7 +40,7 @@ public class GameController implements ActionListener {
 
 
         //add ActionListener
-        this.gameView.resetButton.addActionListener(this);
+        this.gameView.getResetButton().addActionListener(this);
         this.gameView.markCheckbox.addActionListener(this);
         this.gameView.colorsMenuItem.addActionListener(this);
         this.gameView.aboutMenuItem.addActionListener(this);
@@ -92,9 +81,9 @@ public class GameController implements ActionListener {
                 }
 
             }else {
-                if (e.getSource() == gameView.resetButton) {
+                if (e.getSource() == gameView.getResetButton()) {
                     // reset button is clicked
-                    gameView.msgDisplayTextArea.append(BLANK_SPACE + RESET_BUTTON_REACTION);
+                    gameView.msgDisplayTextArea.append(ResourceConfigurations.BLANK_SPACE + ResourceConfigurations.RESET_BUTTON_REACTION);
 
                     resetGame();
 
@@ -103,10 +92,10 @@ public class GameController implements ActionListener {
                     //determine markCheckBoxCount is odd number or even number
                     if (markCheckBoxCount % 2 != 0) {
                         //odd number behavior -> mark box unchecked
-                        gameView.msgDisplayTextArea.append(BLANK_SPACE_UNCHK_BOX + UNCHECK_MARK_CHECKBOX_REACTION);
+                        gameView.msgDisplayTextArea.append(ResourceConfigurations.BLANK_SPACE_UNCHK_BOX + ResourceConfigurations.UNCHECK_MARK_CHECKBOX_REACTION);
                     } else {
                         //odd number behavior -> mark box checked
-                        gameView.msgDisplayTextArea.append(BLANK_SPACE_CHK_BOX + CHECK_MARK_CHECKBOX_REACTION);
+                        gameView.msgDisplayTextArea.append(ResourceConfigurations.BLANK_SPACE_CHK_BOX + ResourceConfigurations.CHECK_MARK_CHECKBOX_REACTION);
 
                     }
                     markCheckBoxCount++;
@@ -128,7 +117,7 @@ public class GameController implements ActionListener {
 
                 } else if (e.getSource() == this.gameView.aboutMenuItem) {
                     try {
-                        JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(RESOURCE_PATH + DIALOG_IMAGE), ABOUT_AUTHOR_SIGNATURE, JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(ResourceConfigurations.RESOURCE_PATH + ResourceConfigurations.DIALOG_IMAGE), ResourceConfigurations.ABOUT_AUTHOR_SIGNATURE, JOptionPane.PLAIN_MESSAGE);
                     } catch (Exception exception) {
                         System.err.println("Dialog at aboutMenuItem exception!!!");
                     }
@@ -150,7 +139,7 @@ public class GameController implements ActionListener {
                             int column = j;
 
                             isButtonClicked[i][j] = true;
-                            gameView.msgDisplayTextArea.append((BLANK_SPACE + "Button" + "[" + (++row) + "," + (++column) + "]" + " is Pressed!!!\n"));
+                            gameView.msgDisplayTextArea.append((ResourceConfigurations.BLANK_SPACE + "Button" + "[" + (++row) + "," + (++column) + "]" + " is Pressed!!!\n"));
                             if (this.gameView.markCheckbox.isSelected()) {
                                 //if configuration match the belonging pattern,
                                 if (this.gameModel.config[i][j] == 0) {
@@ -194,7 +183,7 @@ public class GameController implements ActionListener {
 
                         //Display PerfectGame
                         try {
-                            JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(RESOURCE_PATH + PERFECT_GAME_DIALOG), PERFECT_GAME_MSG, JOptionPane.PLAIN_MESSAGE);
+                            JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(ResourceConfigurations.RESOURCE_PATH + ResourceConfigurations.PERFECT_GAME_DIALOG), ResourceConfigurations.PERFECT_GAME_MSG, JOptionPane.PLAIN_MESSAGE);
                         } catch (Exception ex) {
                             System.err.println("exception");
                         }
@@ -205,7 +194,7 @@ public class GameController implements ActionListener {
                     } else if (pointsCount < (this.gameModel.numberOfColumn * this.gameModel.numberOfRow)) {
 
                         try {
-                            JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(RESOURCE_PATH + SORRY_GAME_DIALOG), SORRY_GAME_MSG, JOptionPane.PLAIN_MESSAGE);
+                            JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(ResourceConfigurations.RESOURCE_PATH + ResourceConfigurations.SORRY_GAME_DIALOG), ResourceConfigurations.SORRY_GAME_MSG, JOptionPane.PLAIN_MESSAGE);
                         } catch (Exception ex) {
                             System.err.println("exception");
                         }
@@ -230,16 +219,15 @@ public class GameController implements ActionListener {
         }
 
         private boolean isAllButtonClicked(){
-            isAllButtonClicked =true;
+
             for (int i = 0; i < this.gameModel.numberOfRow; i++) {
                 for (int j = 0; j < this.gameModel.numberOfColumn; j++) {
-                    if(!isButtonClicked[i][j]){isAllButtonClicked = false;
-                        return isAllButtonClicked;
+                    if(!isButtonClicked[i][j]){
+                        return false;
                     }
                 }
-
             }
-        return isAllButtonClicked;
+        return true;
         }
 
 
