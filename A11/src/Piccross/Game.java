@@ -1,25 +1,27 @@
 package Piccross;
 
-import java.awt.*;
+
+/**
+ * Game.java
+ * @author Jiayu
+ * */
 public class Game {
     public static void main(String[] args) {
 
-
-        if(args == null|| args.length == 0){
-            System.err.println("Error!!!  Please Provide argument to execute!!!");
+        if(args == null || args.length != 1){
+            System.err.println("Error!!!  Please Provide correct argument to execute!!!");
             System.err.println("============================================");
-            System.err.println("Usage ==> java Piccross.Game <C/S>");
+            System.err.println("Usage ==> java Piccross.Game [C/S/MVC]");
 
-        }else
-        if ("MVC".equals(args[0])) {
-            GameModel gameModel = new GameModel();
-            GameView gameView = new GameView();
-            GameController gameController = new GameController(gameModel, gameView);
-        } else if ("S".equals(args[0])) {
-            GameServer gameServer = new GameServer();
-        } else if ("C".equals(args[0])) {
-            GameClient gameClient = new GameClient();
 
+
+
+        }else  if (PgmConfigs.MVC.equals(args[0])) {
+            new GameController(new GameModel(), new GameView());
+        } else if (PgmConfigs.SERVER.equals(args[0])) {
+            new GameServer();
+        } else if (PgmConfigs.CLIENT.equals(args[0])) {
+            new GameClient();
         }
 
     }

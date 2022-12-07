@@ -1,7 +1,5 @@
 package Piccross;
 
-import Piccross.Resource.ResourceConfigurations;
-
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -22,12 +20,13 @@ public class GameServer {
     }
 
     //Lv.1 Components
+    /*main Frame*/
     JFrame serverFrame;
     //Lv.2 Components
     JScrollPane msgPane;
     JPanel textFieldsPanel;
     JLabel serverPicLabel;
-    /* Lv.3 Components */
+    // Lv.3 Components
 
     JTextArea serverTextArea;
 
@@ -64,7 +63,7 @@ public class GameServer {
         //set objects' properties
 
         try {
-            ImageIcon clientPic = new ImageIcon(ResourceConfigurations.RESOURCE_PATH + ResourceConfigurations.SERVER_PIC);
+            ImageIcon clientPic = new ImageIcon(PgmConfigs.RESOURCE_PATH + PgmConfigs.SERVER_PIC);
             serverPicLabel.setIcon(clientPic);
         } catch (Exception e) {
 
@@ -72,10 +71,10 @@ public class GameServer {
 
         }
         serverPicLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        serverPicLabel.setBorder(new EmptyBorder(ResourceConfigurations.THICKNESS_OF_BORDER, ResourceConfigurations.THICKNESS_OF_BORDER, ResourceConfigurations.THICKNESS_OF_BORDER, ResourceConfigurations.THICKNESS_OF_BORDER));
+        serverPicLabel.setBorder(new EmptyBorder(PgmConfigs.THICKNESS_OF_BORDER, PgmConfigs.THICKNESS_OF_BORDER, PgmConfigs.THICKNESS_OF_BORDER, PgmConfigs.THICKNESS_OF_BORDER));
 
         portLabel.setText("Port:");
-        portTextField.setColumns(ResourceConfigurations.NUM_OF_COLUMN_OF_TEXT_FIELD);
+        portTextField.setColumns(PgmConfigs.NUM_OF_COLUMN_OF_TEXT_FIELD);
         portTextField.setText("1000");
 
         //set button color
@@ -92,13 +91,10 @@ public class GameServer {
         //set msgPane
         msgPane.setViewportView(serverTextArea);
         msgPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        msgPane.setBorder(new CompoundBorder(new EmptyBorder(ResourceConfigurations.THICKNESS_OF_BORDER, ResourceConfigurations.THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER), LineBorder.createBlackLineBorder()));
+        msgPane.setBorder(new CompoundBorder(new EmptyBorder(PgmConfigs.THICKNESS_OF_BORDER, PgmConfigs.THICKNESS_OF_BORDER, PgmConfigs. THICKNESS_OF_BORDER, PgmConfigs. THICKNESS_OF_BORDER), LineBorder.createBlackLineBorder()));
 
         //set size of MsgPane
         msgPane.setPreferredSize(new Dimension(580, 100));
-
-
-
 
         //add up
         textFieldsPanel.add(portLabel);
@@ -115,12 +111,12 @@ public class GameServer {
 
 
         try{
-            ImageIcon iconServerFrame = new ImageIcon(ResourceConfigurations.RESOURCE_PATH +ResourceConfigurations.SERVER_LOGO);
+            ImageIcon iconServerFrame = new ImageIcon(PgmConfigs.RESOURCE_PATH + PgmConfigs.SERVER_LOGO);
             serverFrame.setIconImage(iconServerFrame.getImage());
         }catch (Exception e){
             System.err.println("e");
         }
-        serverFrame.setTitle(ResourceConfigurations.SERVER_TITLE);
+        serverFrame.setTitle(PgmConfigs.SERVER_TITLE);
         //set frame properties
         serverFrame.pack();
         serverFrame.setVisible(true);
@@ -134,7 +130,7 @@ public class GameServer {
         int x = (screen.width - width) / 2;
         int y = (screen.height - height) / 2;
         serverFrame.setBounds(x, y, width, height);
-        
+
     }
     ServerSocket serverSocket = null;
     Socket socket;
@@ -185,20 +181,6 @@ public class GameServer {
             }
         });
 
-
-
-
-
-
-/*===============================================================
-        resultButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-***
-*/
     }
     Thread serverMsgThread;
     public void serverDataManagement(){
@@ -211,10 +193,10 @@ public class GameServer {
         }
 
     }
-    public final String SEPARATOR = "#";
-    public final String PROTOCOL = "P";
-    int secondSeparatorIndex = 0;
-    int protocolIndex = 0;
+
+
+
+
     String clientID = "";
     String clientGameConfig = "";
     String fromClientFormattedData;
@@ -256,12 +238,7 @@ public class GameServer {
                     ioException.printStackTrace();
                 }
             }
-            public void inputDataFromClient() throws IOException {
-               // toClientSteam = new PrintStream(socket.getOutputStream());
-              //   fromClientStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-               // toClientSteam.println(numOfClient);
-              //  fromClientFormattedData = fromClientStream.readLine();
-        }
+
 
 
     }
@@ -298,7 +275,7 @@ public class GameServer {
                         clientGameConfig = clientInfo[2];
                         serverTextArea.append(("Client No. " + clientidString + " Game Config: " + clientGameConfig+"\n"));
                     } else if (fromClientFormattedData.contains("P2")) {
-                        toClientFormattedData = clientidString + SEPARATOR + clientGameConfig;
+                        toClientFormattedData = clientidString + PgmConfigs.SEPARATOR + clientGameConfig;
                         toClientSteam.println(toClientFormattedData);
                     }
                         fromClientFormattedData = "";
@@ -310,10 +287,10 @@ public class GameServer {
                     serverTextArea.append("Disconnecting " + clientidString +" at "+socket.getInetAddress() + "!");
                 if (numOfClient == 0 && finalizeCheckBox.isSelected()) {
                     System.out.println("Ending server...");
-
+                    socket.close();
                     System.exit(0);
                 }
-                    socket.close();
+
 
 
 
@@ -324,32 +301,6 @@ public class GameServer {
 
         }
     }
-    //For easy to run, delete before submission
-    public static void main(String[] args) {
-GameServer gs = new GameServer();
-    }
-    //=============================================
+
+
 }
-//======================================
-/*                try {
-                    if(fromClientFormattedData == null){
-                        break;
-                    }
-                    inputDataFromClient();
-
-
-
-                    if (fromClientFormattedData.contains("P1")) {
-                        clientID = fromClientFormattedData.substring(0,1);
-                        clientGameConfig = fromClientFormattedData.substring(5,fromClientFormattedData.length());
-                        System.out.println(("Client No. " + clientID + " Game Config: " + clientGameConfig));
-                    }else if(fromClientFormattedData.contains("P2")){
-                        toClientFormattedData = fromClientFormattedData +SEPARATOR+ clientGameConfig;
-                        toClientSteam.write(toClientFormattedData.getBytes());
-                    }
-
-
-                } catch (Exception Excep) {
-                    Excep.printStackTrace();
-                }*/
-//===============================================

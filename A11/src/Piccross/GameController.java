@@ -1,13 +1,9 @@
 package Piccross;
 
-import Piccross.Resource.ResourceConfigurations;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowListener;
-import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -18,20 +14,21 @@ public class GameController implements ActionListener {
     private GameView gameView;
 
     private boolean [][]isButtonClicked;
-    private boolean isAllButtonClicked;
 
-    int pointsCount = 0;
-    int markCheckBoxCount = 0;
-    boolean isNewGameClicked = false;
+    int pointsCount;
+    int markCheckBoxCount;
+    boolean isNewGameClicked;
 
     public GameController(GameModel gameModel,GameView  gameView) {
-
+        //When game starts, initial the followings properties to its defaults.
+        this.pointsCount = 0;
+        this.markCheckBoxCount = 0;
+        this.isNewGameClicked = false;
         this.gameModel = gameModel;
         this.gameView = gameView;
 
-        initIsButtonClicked();
-        addActionListener();
-
+        this.initIsButtonClicked();
+        this.addActionListener();
         this.startTimer();
     }
 
@@ -41,33 +38,30 @@ public class GameController implements ActionListener {
 
         //add ActionListener
         this.gameView.getResetButton().addActionListener(this);
-        this.gameView.markCheckbox.addActionListener(this);
-        this.gameView.colorsMenuItem.addActionListener(this);
-        this.gameView.aboutMenuItem.addActionListener(this);
-        this.gameView.exitMenuItem.addActionListener(this);
-        this.gameView.newGame.addActionListener(this);
-        this.gameView.solutionMenuItem.addActionListener(this);
+        this.gameView.getMarkCheckbox().addActionListener(this);
+        this.gameView.getColorsMenuItem().addActionListener(this);
+        this.gameView.getAboutMenuItem().addActionListener(this);
+        this.gameView.getExitMenuItem().addActionListener(this);
+        this.gameView.getNewGame().addActionListener(this);
+        this.gameView.getSolutionMenuItem().addActionListener(this);
 
-//Array for add each unit of the game board's action listener
-//=================================================================================
+        //Add action listener for add each unit of the game board, in order to let player be able to play the game.
+        //=================================================================================
 
-        for (int i = 0; i < this.gameView.unitOfBoardButton.length; i++) {
-            for (int j = 0; j <this.gameView.unitOfBoardButton[i].length; j++) {
-                this.gameView.unitOfBoardButton[i][j].addActionListener(this);
+        for (int i = 0; i < this.gameView.getUnitOfBoardButton().length; i++) {
+            for (int j = 0; j <this.gameView.getUnitOfBoardButton()[i].length; j++) {
+                this.gameView.getUnitOfBoardButton()[i][j].addActionListener(this);
             }
 
         }
-//=================================================================================
-
-
-
+        //=================================================================================
     }
 
         @Override
         public void actionPerformed (ActionEvent e){
 
 
-        if (e.getSource() == gameView.newGame) {
+        if (e.getSource() == gameView.getNewGame()) {
                 isNewGameClicked = true;
                 //Default setting of the game
                 this.gameModel.initGame();
@@ -77,25 +71,24 @@ public class GameController implements ActionListener {
             }
             if(!isNewGameClicked){
                 if(e.getSource() != null){
-                    this.gameView.msgDisplayTextArea.append("Please go to\nGame > New Game\nto Start a new game\n");
+                    this.gameView.msgDisplayTextArea.append(PgmConfigs.NEW_GAME_MSG);
                 }
-
             }else {
-                if (e.getSource() == gameView.getResetButton()) {
+                if (e.getSource() == this.gameView.getResetButton()) {
                     // reset button is clicked
-                    gameView.msgDisplayTextArea.append(ResourceConfigurations.BLANK_SPACE + ResourceConfigurations.RESET_BUTTON_REACTION);
+                    gameView.msgDisplayTextArea.append(PgmConfigs.BLANK_SPACE + PgmConfigs.RESET_BUTTON_REACTION);
 
                     resetGame();
 
-                } else if (e.getSource() == gameView.markCheckbox) {
+                } else if (e.getSource() == this.gameView.getMarkCheckbox()) {
                     //markCheckbox is clicked
                     //determine markCheckBoxCount is odd number or even number
                     if (markCheckBoxCount % 2 != 0) {
                         //odd number behavior -> mark box unchecked
-                        gameView.msgDisplayTextArea.append(ResourceConfigurations.BLANK_SPACE_UNCHK_BOX + ResourceConfigurations.UNCHECK_MARK_CHECKBOX_REACTION);
+                        gameView.msgDisplayTextArea.append(PgmConfigs.BLANK_SPACE_UNCHK_BOX + PgmConfigs.UNCHECK_MARK_CHECKBOX_REACTION);
                     } else {
                         //odd number behavior -> mark box checked
-                        gameView.msgDisplayTextArea.append(ResourceConfigurations.BLANK_SPACE_CHK_BOX + ResourceConfigurations.CHECK_MARK_CHECKBOX_REACTION);
+                        gameView.msgDisplayTextArea.append(PgmConfigs.BLANK_SPACE_CHK_BOX + PgmConfigs.CHECK_MARK_CHECKBOX_REACTION);
 
                     }
                     markCheckBoxCount++;
@@ -117,7 +110,7 @@ public class GameController implements ActionListener {
 
                 } else if (e.getSource() == this.gameView.aboutMenuItem) {
                     try {
-                        JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(ResourceConfigurations.RESOURCE_PATH + ResourceConfigurations.DIALOG_IMAGE), ResourceConfigurations.ABOUT_AUTHOR_SIGNATURE, JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(PgmConfigs.RESOURCE_PATH + PgmConfigs.DIALOG_IMAGE), PgmConfigs.ABOUT_AUTHOR_SIGNATURE, JOptionPane.PLAIN_MESSAGE);
                     } catch (Exception exception) {
                         System.err.println("Dialog at aboutMenuItem exception!!!");
                     }
@@ -131,15 +124,15 @@ public class GameController implements ActionListener {
 
 
                 // Game Board is clicked behaviors
-                for (int i = 0; i < this.gameModel.numberOfRow; i++) {
-                    for (int j = 0; j < this.gameModel.numberOfColumn; j++) {
+                for (int i = 0; i < this.gameModel.getNumberOfRow(); i++) {
+                    for (int j = 0; j < this.gameModel.getNumberOfColumn(); j++) {
                         // Responds after Board unit get clicked.
                         if (this.gameView.unitOfBoardButton[i][j].getModel().isArmed()) {
                             int row = i;
                             int column = j;
 
                             isButtonClicked[i][j] = true;
-                            gameView.msgDisplayTextArea.append((ResourceConfigurations.BLANK_SPACE + "Button" + "[" + (++row) + "," + (++column) + "]" + " is Pressed!!!\n"));
+                            gameView.msgDisplayTextArea.append((PgmConfigs.BLANK_SPACE + "Button" + "[" + (++row) + "," + (++column) + "]" + " is Pressed!!!\n"));
                             if (this.gameView.markCheckbox.isSelected()) {
                                 //if configuration match the belonging pattern,
                                 if (this.gameModel.config[i][j] == 0) {
@@ -175,7 +168,7 @@ public class GameController implements ActionListener {
 
                 if (isAllButtonClicked()) {
                     //accumulated points reached  C*R
-                    if (pointsCount == (this.gameModel.numberOfColumn * this.gameModel.numberOfRow)) {
+                    if (pointsCount == (this.gameModel.getNumberOfColumn() * this.gameModel.getNumberOfRow())) {
                         //displaySplashScreen(1000);
                         this.gameView.msgDisplayTextArea.append("                    Perfect Game!\n");
                         this.gameView.msgDisplayTextArea.append("                      Points: " + pointsCount + "\n");
@@ -183,7 +176,7 @@ public class GameController implements ActionListener {
 
                         //Display PerfectGame
                         try {
-                            JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(ResourceConfigurations.RESOURCE_PATH + ResourceConfigurations.PERFECT_GAME_DIALOG), ResourceConfigurations.PERFECT_GAME_MSG, JOptionPane.PLAIN_MESSAGE);
+                            JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(PgmConfigs.RESOURCE_PATH + PgmConfigs.PERFECT_GAME_DIALOG), PgmConfigs.PERFECT_GAME_MSG, JOptionPane.PLAIN_MESSAGE);
                         } catch (Exception ex) {
                             System.err.println("exception");
                         }
@@ -191,10 +184,10 @@ public class GameController implements ActionListener {
                         //Restart game
                         this.gameModel.initGame();
                         resetGame();
-                    } else if (pointsCount < (this.gameModel.numberOfColumn * this.gameModel.numberOfRow)) {
+                    } else if (pointsCount < (this.gameModel.getNumberOfColumn() * this.gameModel.getNumberOfRow())) {
 
                         try {
-                            JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(ResourceConfigurations.RESOURCE_PATH + ResourceConfigurations.SORRY_GAME_DIALOG), ResourceConfigurations.SORRY_GAME_MSG, JOptionPane.PLAIN_MESSAGE);
+                            JOptionPane.showMessageDialog(this.gameView.mainFrame, new ImageIcon(PgmConfigs.RESOURCE_PATH + PgmConfigs.SORRY_GAME_DIALOG), PgmConfigs.SORRY_GAME_MSG, JOptionPane.PLAIN_MESSAGE);
                         } catch (Exception ex) {
                             System.err.println("exception");
                         }
@@ -209,9 +202,9 @@ public class GameController implements ActionListener {
         }
 
         private void initIsButtonClicked(){
-            isButtonClicked = new boolean[this.gameModel.numberOfRow][this.gameModel.numberOfColumn];
-            for (int i = 0; i < this.gameModel.numberOfRow; i++) {
-                for (int j = 0; j < this.gameModel.numberOfColumn; j++) {
+            isButtonClicked = new boolean[this.gameModel.getNumberOfRow()][this.gameModel.getNumberOfColumn()];
+            for (int i = 0; i < this.gameModel.getNumberOfRow(); i++) {
+                for (int j = 0; j < this.gameModel.getNumberOfColumn(); j++) {
                         isButtonClicked[i][j] = false;
                     }
                 }
@@ -220,8 +213,8 @@ public class GameController implements ActionListener {
 
         private boolean isAllButtonClicked(){
 
-            for (int i = 0; i < this.gameModel.numberOfRow; i++) {
-                for (int j = 0; j < this.gameModel.numberOfColumn; j++) {
+            for (int i = 0; i < this.gameModel.getNumberOfRow(); i++) {
+                for (int j = 0; j < this.gameModel.getNumberOfColumn(); j++) {
                     if(!isButtonClicked[i][j]){
                         return false;
                     }
@@ -238,14 +231,14 @@ public class GameController implements ActionListener {
         seconds = 0;
 
 
-        for (int i = 0;i<this.gameModel.numberOfColumn;i++){
-            for (int j = 0;j<this.gameModel.numberOfColumn;j++){
+        for (int i = 0;i<this.gameModel.getNumberOfColumn();i++){
+            for (int j = 0;j<this.gameModel.getNumberOfColumn();j++){
                 this.gameView.unitOfBoardButton[i][j].setBackground(Color.lightGray);
             }
         }
 
         this.gameView.columnLabelString = this.gameModel.columnNumLabelArray;
-        this.gameView.rowLabelString = this.gameModel.rowNumLabelArray;
+        this.gameView.rowLabelString = this.gameModel.getLeftNumLabel();
         this.gameView.updateLabelView();
         this.initIsButtonClicked();
     }
@@ -259,7 +252,7 @@ public class GameController implements ActionListener {
         task = new Runnable() {
             @Override
             public void run() {
-                seconds++;// Update your interface
+                ++seconds;// Update your interface
                 gameView.timeTextField.setText((seconds)+"s");
             }
         };

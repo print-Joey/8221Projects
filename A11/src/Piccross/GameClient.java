@@ -1,9 +1,7 @@
+
 package Piccross;
 
 
-
-
-import Piccross.Resource.ResourceConfigurations;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -103,7 +101,8 @@ public class GameClient {
         // import images from specific path, Path may vary between different IDE.
         try {
 
-            ImageIcon clientPic = new ImageIcon(ResourceConfigurations.RESOURCE_PATH + ResourceConfigurations.CLIENT_PIC);
+            ImageIcon clientPic = new ImageIcon(PgmConfigs.RESOURCE_PATH + PgmConfigs.CLIENT_PIC);
+            System.out.println(PgmConfigs.RESOURCE_PATH + PgmConfigs.CLIENT_PIC);
             picLabel.setIcon(clientPic);
         } catch (Exception e) {
 
@@ -112,19 +111,19 @@ public class GameClient {
         }
         //Set each component's attributes
         picLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        picLabel.setBorder(new EmptyBorder(ResourceConfigurations.THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER));
+        picLabel.setBorder(new EmptyBorder(PgmConfigs.THICKNESS_OF_BORDER, PgmConfigs. THICKNESS_OF_BORDER, PgmConfigs. THICKNESS_OF_BORDER, PgmConfigs. THICKNESS_OF_BORDER));
 
         userLabel.setText("User:");
-        userTextField.setColumns(ResourceConfigurations.NUM_OF_COLUMN_OF_TEXT_FIELD);
+        userTextField.setColumns(PgmConfigs.NUM_OF_COLUMN_OF_TEXT_FIELD);
         userTextField.setText("Your name");
 
         serverLabel.setText("Server:");
-        serverTextField.setColumns(ResourceConfigurations.NUM_OF_COLUMN_OF_TEXT_FIELD);
+        serverTextField.setColumns(PgmConfigs.NUM_OF_COLUMN_OF_TEXT_FIELD);
         //set default server localhost for convenience
         serverTextField.setText("localhost");
 
         portLabel.setText("Port:");
-        portTextField.setColumns(ResourceConfigurations.NUM_OF_COLUMN_OF_TEXT_FIELD);
+        portTextField.setColumns(PgmConfigs.NUM_OF_COLUMN_OF_TEXT_FIELD);
         portTextField.setText("1000");
         //set button color
         connectButton.setBackground(Color.ORANGE);
@@ -144,7 +143,7 @@ public class GameClient {
         clientTextArea.setBackground(Color.WHITE);
         msgPane.setViewportView(clientTextArea);
         msgPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        msgPane.setBorder(new CompoundBorder(new EmptyBorder(ResourceConfigurations.THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER,ResourceConfigurations. THICKNESS_OF_BORDER), LineBorder.createBlackLineBorder()));
+        msgPane.setBorder(new CompoundBorder(new EmptyBorder(PgmConfigs.THICKNESS_OF_BORDER, PgmConfigs. THICKNESS_OF_BORDER, PgmConfigs. THICKNESS_OF_BORDER, PgmConfigs. THICKNESS_OF_BORDER), LineBorder.createBlackLineBorder()));
 
         //set size of MsgPane
         msgPane.setPreferredSize(new Dimension(580, 100));
@@ -181,12 +180,12 @@ public class GameClient {
 
         // import images from specific path, Path may vary between different IDE.
         try {
-            ImageIcon iconServerFrame = new ImageIcon(ResourceConfigurations.RESOURCE_PATH +ResourceConfigurations. CLIENT_LOGO);
+            ImageIcon iconServerFrame = new ImageIcon(PgmConfigs.RESOURCE_PATH + PgmConfigs. CLIENT_LOGO);
             clientFrame.setIconImage(iconServerFrame.getImage());
         } catch (Exception e) {
             System.err.println("e");
         }
-        clientFrame.setTitle(ResourceConfigurations.CLIENT_TITLE);
+        clientFrame.setTitle(PgmConfigs.CLIENT_TITLE);
         //set frame properties
         //Set new Close Operation by exit Client
         clientFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -232,7 +231,7 @@ public class GameClient {
                 try {
                     toServerStream = socket.getOutputStream();
 
-                    toServerGameConfigFormattedData = clientId + ResourceConfigurations.SEPARATOR + ResourceConfigurations.PROTOCOL + "1" + ResourceConfigurations.SEPARATOR + newGameConfig;
+                    toServerGameConfigFormattedData = clientId + PgmConfigs.SEPARATOR + PgmConfigs.PROTOCOL + "1" + PgmConfigs.SEPARATOR + newGameConfig;
                     toServerStream.write(toServerGameConfigFormattedData.getBytes());
 
                 } catch (Exception ex) {
@@ -307,7 +306,7 @@ public class GameClient {
                             PrintStream toServerPrintStream = new PrintStream(socket.getOutputStream());
                             //toServerStream = socket.getOutputStream();
 
-                            toServerGameConfigFormattedData = new String(clientId + ResourceConfigurations.SEPARATOR + ResourceConfigurations.PROTOCOL + "2");
+                            toServerGameConfigFormattedData = new String(clientId + PgmConfigs.SEPARATOR + PgmConfigs.PROTOCOL + "2");
 
                             toServerPrintStream.println(toServerGameConfigFormattedData);
                             toServerPrintStream.flush();
@@ -340,7 +339,7 @@ public class GameClient {
                     }
 
                     PrintStream printStream = new PrintStream(socket.getOutputStream());
-                    printStream.println(clientId + ResourceConfigurations.PROTOCOL + ResourceConfigurations.END_CONNECTION_SYMBOOL);
+                    printStream.println(clientId + PgmConfigs.PROTOCOL + PgmConfigs.END_CONNECTION_SYMBOOL);
                     socket.close();
                     //reset connection Button
                     System.exit(0);
